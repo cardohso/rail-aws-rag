@@ -4,7 +4,7 @@ data "aws_region" "current" {}
 locals {
   account = data.aws_caller_identity.current.account_id
   region  = data.aws_region.current.region
-  repo    = "repo:${var.github_repository}"
+  repo    = var.oidc_subject_prefix # immutable: a deleted and re-created repo of the same name gets no access
   p       = var.name_prefix
 
   state_bucket_arn = "arn:aws:s3:::${var.state_bucket_name}"

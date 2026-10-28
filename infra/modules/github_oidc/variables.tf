@@ -3,9 +3,14 @@ variable "name_prefix" {
   type        = string
 }
 
-variable "github_repository" {
-  description = "owner/name of the repository whose workflows may assume the roles."
+variable "oidc_subject_prefix" {
+  description = "Start of the OIDC `sub` claim for the repository. Newer repositories use immutable subjects that carry the owner and repository IDs, e.g. repo:owner@123/name@456; read it with `gh api repos/OWNER/REPO/actions/oidc/customization/sub` (sub_claim_prefix)."
   type        = string
+
+  validation {
+    condition     = startswith(var.oidc_subject_prefix, "repo:")
+    error_message = "oidc_subject_prefix starts with repo:"
+  }
 }
 
 variable "deploy_environment" {

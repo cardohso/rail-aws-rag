@@ -28,7 +28,7 @@ module "state_bucket" {
 module "github_oidc" {
   source = "../modules/github_oidc"
 
-  name_prefix       = var.name_prefix
-  github_repository = var.github_repository
-  state_bucket_name = module.state_bucket.bucket_name
+  name_prefix         = var.name_prefix
+  oidc_subject_prefix = var.oidc_subject_prefix
+  state_bucket_name   = module.state_bucket.bucket_name
 }

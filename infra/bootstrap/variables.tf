@@ -21,8 +21,8 @@ variable "alert_email" {
   }
 }
 
-variable "github_repository" {
-  description = "owner/name of the repository whose workflows may deploy."
+variable "oidc_subject_prefix" {
+  description = "sub_claim_prefix from `gh api repos/OWNER/REPO/actions/oidc/customization/sub`."
   type        = string
-  default     = "cardohso/rail-aws-rag"
+  default     = "repo:cardohso@119709544/rail-aws-rag@1437518588"
 }

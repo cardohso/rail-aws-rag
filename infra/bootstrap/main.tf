@@ -23,3 +23,12 @@ module "state_bucket" {
 
   name_prefix = var.name_prefix
 }
+
+# GitHub Actions sign in with short-lived OIDC tokens: no AWS keys are stored in GitHub.
+module "github_oidc" {
+  source = "../modules/github_oidc"
+
+  name_prefix       = var.name_prefix
+  github_repository = var.github_repository
+  state_bucket_name = module.state_bucket.bucket_name
+}

@@ -13,9 +13,16 @@ variable "name_prefix" {
 variable "alert_email" {
   description = "Address that receives the budget alerts. Set it in terraform.tfvars, which is not committed."
   type        = string
+  sensitive   = true # plans in public CI logs must not print it
 
   validation {
     condition     = can(regex("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", var.alert_email))
     error_message = "alert_email must be an email address."
   }
+}
+
+variable "github_repository" {
+  description = "owner/name of the repository whose workflows may deploy."
+  type        = string
+  default     = "cardohso/rail-aws-rag"
 }

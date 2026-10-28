@@ -82,3 +82,19 @@ resource "aws_s3_bucket_policy" "data" {
 
   depends_on = [aws_s3_bucket_public_access_block.data]
 }
+
+# The index lives under a prefix named after its manifest, so a rebuilt index never overwrites
+# the one a running Lambda is reading; the Lambda moves to the new prefix in the same apply.
+locals {
+  index_files  = ["manifest.json", "passages.json", "vectors.npy", "bm25.npz"]
+  index_prefix = "index/${substr(filesha256("${var.index_dir}/manifest.json"), 0, 12)}/"
+}
+
+resource "aws_s3_object" "index" {
+  for_each = toset(local.index_files)
+
+  bucket = aws_s3_bucket.data.id
+  key    = "${local.index_prefix}${each.key}"
+  source = "${var.index_dir}/${each.key}"
+  etag   = filemd5("${var.index_dir}/${each.key}")
+}

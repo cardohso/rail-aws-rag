@@ -6,6 +6,7 @@ variable "name_prefix" {
 variable "alert_email" {
   description = "Address that receives the error alarm."
   type        = string
+  sensitive   = true # plans in public CI logs must not print it
 }
 
 variable "api_id" {

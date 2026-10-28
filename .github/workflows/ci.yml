@@ -1,0 +1,121 @@
+name: ci
+
+# Every pull request and every push to main: tests, lint, Terraform checks and an IaC security
+# scan. Pull requests from this repository also get a `terraform plan` of the dev stack, posted
+# as a comment, run with a read-only role that GitHub's OIDC token unlocks (no AWS keys stored).
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TF_IN_AUTOMATION: "1"
+  TF_VERSION: "1.17.0"
+  AWS_REGION: eu-west-1
+  HF_HUB_DISABLE_TELEMETRY: "1"
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pytest # offline: Bedrock, Guardrails, S3 and DynamoDB are faked
+
+  terraform-static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+      - name: terraform fmt
+        run: terraform fmt -check -recursive infra
+      - name: terraform validate
+        run: |
+          for stack in infra/bootstrap infra/envs/dev; do
+            terraform -chdir="$stack" init -backend=false -input=false
+            terraform -chdir="$stack" validate
+          done
+      - uses: terraform-linters/setup-tflint@6ffdbaa3be476b3431f7275c26966ef32ff60337 # v6.3.2
+        with:
+          tflint_version: v0.65.0
+      - name: tflint
+        run: |
+          for dir in infra/bootstrap infra/envs/dev infra/modules/*/; do
+            tflint --chdir "$dir" --config "$GITHUB_WORKSPACE/.tflint.hcl"
+          done
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+      - name: checkov (IaC security scan)
+        run: uvx --from checkov==3.3.30 checkov -d infra --quiet --compact
+
+  plan:
+    # Forked pull requests get no OIDC token, so they stop at the checks above.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    needs: [python, terraform-static]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      id-token: write # OIDC token for the read-only plan role
+      pull-requests: write # the plan comment
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/build
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ secrets.AWS_PLAN_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          mask-aws-account-id: true
+      - uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
+      - name: terraform init
+        run: >
+          terraform -chdir=infra/envs/dev init -input=false
+          -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}"
+          -backend-config="key=dev/terraform.tfstate" -backend-config="region=${{ env.AWS_REGION }}"
+          -backend-config="encrypt=true" -backend-config="use_lockfile=true"
+      - name: terraform plan
+        id: plan
+        env:
+          TF_VAR_alert_email: ${{ secrets.ALERT_EMAIL }}
+        run: |
+          set -o pipefail
+          terraform -chdir=infra/envs/dev plan -input=false -no-color -lock-timeout=120s | tee plan.txt
+      - name: Comment the plan summary
+        if: always() && steps.plan.outcome != 'skipped'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            // Only resource addresses and the totals: the full plan, with ARNs, stays in the log.
+            const fs = require("fs");
+            const text = fs.existsSync("plan.txt") ? fs.readFileSync("plan.txt", "utf8") : "";
+            const lines = text.split("\n").filter((l) =>
+              /^\s+# \S+ (will be|must be)/.test(l) || /^(Plan:|No changes\.|Error:)/.test(l));
+            const marker = "<!-- terraform-plan-dev -->";
+            const body = [marker, "### `terraform plan` (dev)", "",
+              `Outcome: **${{ steps.plan.outcome }}**`, "", "```", ...lines.map((l) => l.trim()), "```",
+              "", `Full plan in the [workflow log](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).`].join("\n");
+            const { data: comments } = await github.rest.issues.listComments({
+              ...context.repo, issue_number: context.issue.number });
+            const old = comments.find((c) => c.body.includes(marker));
+            if (old) await github.rest.issues.updateComment({ ...context.repo, comment_id: old.id, body });
+            else await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });

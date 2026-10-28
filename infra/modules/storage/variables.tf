@@ -8,3 +8,8 @@ variable "force_destroy" {
   type        = bool
   default     = false
 }
+
+variable "index_dir" {
+  description = "Local folder written by rail_aws_rag.build_index. Its files are uploaded under index/<hash>/."
+  type        = string
+}

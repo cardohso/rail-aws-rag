@@ -1,3 +1,2 @@
 # Copy to terraform.tfvars (not committed) and fill in.
-alert_email  = "you@example.com"
-index_prefix = "index/<hash>/" # printed by the index upload step
+alert_email = "you@example.com"

@@ -14,6 +14,7 @@ module "storage" {
 
   name_prefix   = var.name_prefix
   force_destroy = true # the index is rebuilt from the repo, so a destroy must not get stuck on it
+  index_dir     = var.index_dir
 }
 
 module "quota" {
@@ -35,7 +36,7 @@ module "compute" {
   lambda_zip_path   = var.lambda_zip_path
   data_bucket_name  = module.storage.bucket_name
   data_bucket_arn   = module.storage.bucket_arn
-  index_prefix      = var.index_prefix
+  index_prefix      = module.storage.index_prefix
   model_id          = var.model_id
   guardrail_id      = module.guardrail.guardrail_id
   guardrail_arn     = module.guardrail.guardrail_arn

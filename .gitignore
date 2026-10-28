@@ -26,6 +26,6 @@ __pycache__/
 .DS_Store
 
 # Built index (rebuilt by rail_aws_rag.build_index)
-build/
+/build/
 eval/goldpass/records.json
 eval/goldpass/results/

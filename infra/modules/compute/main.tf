@@ -17,7 +17,9 @@ resource "aws_s3_object" "package" {
   bucket = var.data_bucket_name
   key    = "lambda/${substr(sha256(local.zip_hash), 0, 12)}.zip"
   source = var.lambda_zip_path
-  etag   = filemd5(var.lambda_zip_path)
+  # Not `etag`: a 113 MB upload is multipart, and its ETag never equals the file's MD5,
+  # which would re-upload the zip on every apply.
+  source_hash = filemd5(var.lambda_zip_path)
 }
 
 resource "aws_cloudwatch_log_group" "lambda" {

@@ -13,6 +13,7 @@ variable "name_prefix" {
 variable "alert_email" {
   description = "Address that receives the error alarm. Set it in terraform.tfvars, which is not committed."
   type        = string
+  sensitive   = true # plans in public CI logs must not print it
 }
 
 variable "lambda_zip_path" {
@@ -21,9 +22,10 @@ variable "lambda_zip_path" {
   default     = "../../../build/lambda.zip"
 }
 
-variable "index_prefix" {
-  description = "Prefix of the uploaded index in the data bucket, for example index/d63c374869fb/."
+variable "index_dir" {
+  description = "Index built by rail_aws_rag.build_index, relative to this folder."
   type        = string
+  default     = "../../../build/index"
 }
 
 variable "model_id" {

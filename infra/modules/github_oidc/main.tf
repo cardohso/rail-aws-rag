@@ -92,6 +92,15 @@ data "aws_iam_policy_document" "state" {
   }
 }
 
+# Reads Terraform's refresh needs that ReadOnlyAccess does not include.
+data "aws_iam_policy_document" "refresh_gaps" {
+  statement {
+    sid       = "GuardrailTags"
+    actions   = ["bedrock:ListTagsForResource"]
+    resources = ["arn:aws:bedrock:${local.region}:${local.account}:guardrail/*"]
+  }
+}
+
 # Both roles get ReadOnlyAccess for Terraform's refresh. That policy also reads data, and the
 # bootstrap state (which holds the budget email). Neither is needed, so both are denied.
 data "aws_iam_policy_document" "limits" {
@@ -117,6 +126,7 @@ data "aws_iam_policy_document" "limits" {
 data "aws_iam_policy_document" "plan_extra" {
   source_policy_documents = [
     data.aws_iam_policy_document.state.json,
+    data.aws_iam_policy_document.refresh_gaps.json,
     data.aws_iam_policy_document.limits.json,
   ]
 }
@@ -143,6 +153,7 @@ resource "aws_iam_role_policy_attachment" "deploy_read" {
 data "aws_iam_policy_document" "deploy" {
   source_policy_documents = [
     data.aws_iam_policy_document.state.json,
+    data.aws_iam_policy_document.refresh_gaps.json,
     data.aws_iam_policy_document.limits.json,
   ]
 

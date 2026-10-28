@@ -8,6 +8,7 @@ crash.log
 *.tfvars
 *.tfvars.json
 !*.tfvars.example
+backend.hcl
 
 # Secrets and local config
 .env

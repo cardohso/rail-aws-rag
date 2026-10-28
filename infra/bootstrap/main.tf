@@ -16,3 +16,10 @@ module "budgets" {
   name_prefix = var.name_prefix
   alert_email = var.alert_email
 }
+
+# Holds the remote state of every stack, including this one after the migration.
+module "state_bucket" {
+  source = "../modules/state_bucket"
+
+  name_prefix = var.name_prefix
+}

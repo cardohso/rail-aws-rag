@@ -8,6 +8,8 @@ terraform {
     }
   }
 
-  # Local state on purpose: this stack creates the budgets alert first, then the S3
-  # bucket that will hold remote state. See the README for the migration step.
+  # This stack created the budgets alert and the state bucket with local state, then moved
+  # its own state into that bucket. Bucket and key come from backend.hcl (not committed):
+  #   terraform init -backend-config=backend.hcl
+  backend "s3" {}
 }

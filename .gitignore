@@ -24,3 +24,8 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# Built index (rebuilt by rail_aws_rag.build_index)
+build/
+eval/goldpass/records.json
+eval/goldpass/results/

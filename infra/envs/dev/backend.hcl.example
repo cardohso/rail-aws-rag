@@ -1,0 +1,6 @@
+# Copy to backend.hcl (not committed). Use the state_bucket_name output of infra/bootstrap.
+bucket       = "rail-aws-rag-tfstate-<account-id>"
+key          = "dev/terraform.tfstate"
+region       = "eu-west-1"
+encrypt      = true
+use_lockfile = true

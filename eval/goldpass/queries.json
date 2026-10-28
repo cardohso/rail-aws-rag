@@ -1,0 +1,22 @@
+{
+ "q01": "stationary noise limit LpAeq,T electric multiple unit EMU rolling stock noise NOI",
+ "q02": "pass-by noise limit freight wagons 80 km/h technical specifications for interoperability rolling stock noise NOI",
+ "q03": "escape walkway width headroom railway tunnel safety in railway tunnels SRT",
+ "q04": "emergency lighting tunnel escape routes main power supply fails duration safety in railway tunnels SRT",
+ "q05": "maximum distance between evacuation and rescue points in a tunnel for Category A and Category B passenger rolling stock difference between Category A and Category B TSI SRT safety in railway tunnels",
+ "q06": "wheelchair spaces passenger unit length 250 m persons with reduced mobility TSI",
+ "q07": "minimum clear usable width exterior passenger doors wheelchair access doors level access persons with reduced mobility PRM TSI",
+ "q08": "Energy TSI traction power supply systems allowed new lines faster than 250 km/h",
+ "q09": "Class A train protection and radio systems control-command and signalling CCS TSI",
+ "q10": "rear end signal passenger train freight train marker board tail lamp OPE TSI",
+ "q11": "freight trains reflective plates rear-end signal Portugal EU network acceptance date operation and traffic management TSI OPE",
+ "q12": "Directive (EU) 2016/797 vehicle authorisation for placing on the market application time limit Agency handle",
+ "q13": "Directive (EU) 2016/797 non-application of technical specifications for interoperability TSI Commission decision time limit deadline Member State request",
+ "q14": "tunnel escape walkway safe area door minimum clear opening width height SRT technical specification for interoperability",
+ "q15": "Directive (EU) 2016/797 vehicle authorisation for placing on the market upgraded renewed already authorised vehicle",
+ "q16": "language train crew safety-related communication staff authorising train movements Operation and Traffic Management TSI OPE",
+ "q17": "capital France railway law",
+ "q18": "GDPR General Data Protection Regulation passenger personal data railway undertakings obligations",
+ "q19": "locomotive crashworthiness design collision scenarios rolling stock TSI",
+ "q20": "maximum line speed Lisbon Porto line"
+}

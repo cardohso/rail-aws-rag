@@ -201,14 +201,15 @@ def parse_guardrail_response(response: dict, original: str) -> GuardrailResult:
 
 
 def make_clients(region: str):
-    """bedrock-runtime client with short timeouts and standard retries (Lambda has 25 s)."""
+    """bedrock-runtime client with short timeouts and one retry: up to 5 calls per question
+    must fit in the 25 s Lambda timeout."""
     import boto3
     from botocore.config import Config
 
     config = Config(
         region_name=region,
         connect_timeout=3,
-        read_timeout=15,
-        retries={"mode": "standard", "max_attempts": 3},
+        read_timeout=10,
+        retries={"mode": "standard", "max_attempts": 2},
     )
     return boto3.client("bedrock-runtime", config=config)

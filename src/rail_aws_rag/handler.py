@@ -20,9 +20,19 @@ from rail_aws_rag.bedrock import LLMUnavailable
 MIN_QUESTION, MAX_QUESTION = 3, 500
 
 logger = logging.getLogger("rail_aws_rag")
-logger.setLevel(logging.INFO)
 
 _pipeline = None
+_quota = None
+_quota_ready = False
+
+
+def get_quota():
+    global _quota, _quota_ready
+    if not _quota_ready:
+        from rail_aws_rag.runtime import build_quota
+
+        _quota, _quota_ready = build_quota(os.environ), True
+    return _quota
 
 
 def get_pipeline():
@@ -43,7 +53,8 @@ def _json(status: int, body: dict) -> dict:
 
 
 def _log(event: str, **fields: Any) -> None:
-    logger.info(json.dumps({"event": event, **fields}, ensure_ascii=False))
+    # One JSON object per line: CloudWatch Logs Insights reads its fields without a parse step.
+    print(json.dumps({"event": event, **fields}, ensure_ascii=False), flush=True)
 
 
 def _question(event: dict) -> str | None:
@@ -76,7 +87,7 @@ def health(pipeline) -> dict:
     }
 
 
-def ask(pipeline, event: dict, request_id: str) -> dict:
+def ask(get_pipeline_fn, quota, event: dict, request_id: str) -> dict:
     question = _question(event)
     if question is None:
         return _json(
@@ -87,7 +98,12 @@ def ask(pipeline, event: dict, request_id: str) -> dict:
             },
         )
     try:
-        result = pipeline.ask(question, trace_id=request_id)
+        # The cap is checked before the pipeline is built, so a rejected request on a cold
+        # container costs one DynamoDB write, not an index download.
+        if quota is not None and not quota.take():
+            _log("ask_over_quota", trace_id=request_id)
+            return _json(429, {"error": "The daily question limit is used up; try again tomorrow."})
+        result = get_pipeline_fn().ask(question, trace_id=request_id)
     except LLMUnavailable:
         _log("ask_unavailable", trace_id=request_id)
         return _json(503, {"error": "The language model is busy; try again shortly."})
@@ -95,7 +111,7 @@ def ask(pipeline, event: dict, request_id: str) -> dict:
     return _json(200, result.response())
 
 
-def handler(event: dict, context: Any = None, pipeline=None) -> dict:
+def handler(event: dict, context: Any = None, pipeline=None, quota=None) -> dict:
     http = event.get("requestContext", {}).get("http", {})
     method, path = http.get("method", ""), event.get("rawPath", "")
     request_id = getattr(context, "aws_request_id", "") or "local"
@@ -103,7 +119,12 @@ def handler(event: dict, context: Any = None, pipeline=None) -> dict:
         if (method, path) == ("GET", "/health"):
             return _json(200, health(pipeline or get_pipeline()))
         if (method, path) == ("POST", "/ask"):
-            return ask(pipeline or get_pipeline(), event, request_id)
+            return ask(
+                (lambda: pipeline) if pipeline else get_pipeline,
+                quota if quota is not None else get_quota(),
+                event,
+                request_id,
+            )
         return _json(404, {"error": "Not found. Use GET /health or POST /ask."})
     except Exception:
         logger.exception("unhandled error, trace_id=%s", request_id)

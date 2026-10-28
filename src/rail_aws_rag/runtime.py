@@ -27,6 +27,19 @@ def download_index(s3: Any, bucket: str, prefix: str, dest: Path) -> Path:
     return dest
 
 
+def build_quota(env: Mapping[str, str], *, dynamodb: Any = None):
+    """The daily cap, or None when TABLE_NAME is not set (local runs, tests)."""
+    if not env.get("TABLE_NAME"):
+        return None
+    from rail_aws_rag.quota import DailyQuota
+
+    if dynamodb is None:
+        import boto3
+
+        dynamodb = boto3.client("dynamodb")
+    return DailyQuota(dynamodb, env["TABLE_NAME"], int(env.get("DAILY_LIMIT", "50")))
+
+
 def config_from_env(env: Mapping[str, str]) -> PipelineConfig:
     return PipelineConfig(
         k=int(env.get("TOP_K", "8")),

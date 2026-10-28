@@ -1,6 +1,5 @@
 import base64
 import json
-import logging
 
 import pytest
 
@@ -89,11 +88,12 @@ def test_unexpected_error_is_500_with_the_trace_id(tmp_path):
     assert body["trace_id"] == "req-1"
 
 
-def test_request_log_never_contains_the_question(pipeline, caplog):
+def test_request_log_is_one_json_line_without_the_question(pipeline, capsys):
     secret = "my private case about Lisbon depot"
-    with caplog.at_level(logging.INFO, logger="rail_aws_rag"):
-        call(pipeline, "POST", "/ask", {"question": secret})
-    logged = " ".join(r.getMessage() for r in caplog.records)
-    assert '"event": "ask"' in logged
-    assert "Lisbon" not in logged
-    assert f'"question_chars": {len(secret)}' in logged
+    call(pipeline, "POST", "/ask", {"question": secret})
+    (line,) = capsys.readouterr().out.strip().splitlines()
+    record = json.loads(line)
+    assert record["event"] == "ask"
+    assert record["question_chars"] == len(secret)
+    assert record["llm_calls"] == 3
+    assert "Lisbon" not in line

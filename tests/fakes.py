@@ -160,3 +160,22 @@ def converse_response(*, text=None, tool_input=None, stop="end_turn", tokens=(50
         "usage": {"inputTokens": tokens[0], "outputTokens": tokens[1], "totalTokens": sum(tokens)},
         "metrics": {"latencyMs": 100},
     }
+
+
+class FakeDynamoDB:
+    """update_item with the conditional ADD that DailyQuota uses: one counter per day key."""
+
+    def __init__(self, error: Exception | None = None):
+        self.counts: dict[str, int] = {}
+        self.error = error
+        self.requests: list[dict] = []
+
+    def update_item(self, **request):
+        self.requests.append(request)
+        if self.error:
+            raise self.error
+        day = request["Key"]["day"]["S"]
+        limit = int(request["ExpressionAttributeValues"][":limit"]["N"])
+        if self.counts.get(day, 0) >= limit:
+            raise FakeClientError("ConditionalCheckFailedException")
+        self.counts[day] = self.counts.get(day, 0) + 1

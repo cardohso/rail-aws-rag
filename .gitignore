@@ -1,0 +1,25 @@
+# Terraform: state can contain emails and ARNs, variable files hold personal values
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+plan.out
+crash.log
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+.aws/
+
+# Python and tooling
+__pycache__/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# macOS
+.DS_Store

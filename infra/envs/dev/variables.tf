@@ -31,7 +31,7 @@ variable "index_dir" {
 variable "model_id" {
   description = "Bedrock model or EU inference profile that generates answers."
   type        = string
-  default     = "eu.amazon.nova-lite-v1:0"
+  default     = "eu.amazon.nova-2-lite-v1:0"
 }
 
 variable "daily_limit" {

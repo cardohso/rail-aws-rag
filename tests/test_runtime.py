@@ -62,3 +62,5 @@ def test_config_from_env():
     cfg = config_from_env({"TOP_K": "5", "MIN_SCORE": "0.7", "SEARCH_MODE": "dense"})
     assert (cfg.k, cfg.min_score, cfg.hybrid) == (5, 0.7, False)
     assert config_from_env({}).k == 8
+    assert config_from_env({}).rewrite is False
+    assert config_from_env({"REWRITE": "1"}).rewrite is True

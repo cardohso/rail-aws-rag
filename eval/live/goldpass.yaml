@@ -31,4 +31,4 @@ system:
     passage: {id: passage_id, doc_id: doc_id, text: passage, score: score}
     citation: {passage_id: passage_id, doc_id: doc_id}
 
-generator: {model: amazon.nova-2-lite-v1, family: amazon}
+generator: {model: amazon.nova-lite-v1, family: amazon}

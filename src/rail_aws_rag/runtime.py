@@ -45,6 +45,7 @@ def config_from_env(env: Mapping[str, str]) -> PipelineConfig:
         k=int(env.get("TOP_K", "8")),
         min_score=float(env.get("MIN_SCORE", "0.60")),
         hybrid=env.get("SEARCH_MODE", "hybrid") == "hybrid",
+        rewrite=env.get("REWRITE", "0").lower() in ("1", "true", "yes"),
     )
 
 

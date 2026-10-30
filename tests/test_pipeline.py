@@ -9,7 +9,7 @@ from fakes import FakeDense, FakeGuardrail, FakeLLM, make_pipeline, unit
 QUESTION = "What is the stationary noise limit for an EMU?"
 
 
-def test_answer_with_citation_after_three_capped_model_calls(tmp_path):
+def test_answer_with_citation_after_two_capped_model_calls(tmp_path):
     llm = FakeLLM(grade={"relevant": [1, 2]})
     result = make_pipeline(tmp_path, llm=llm).ask(QUESTION, trace_id="t1")
 
@@ -19,14 +19,39 @@ def test_answer_with_citation_after_three_capped_model_calls(tmp_path):
     assert citation["passage_id"] == "tsi-noi:Annex §4.2.1#1"
     assert citation["url"].endswith("CELEX:02014R1304-20230928")
     assert citation["score"] == 1.0
-    assert [c["system"] for c in llm.calls] == [prompts.REWRITE, prompts.GRADE, prompts.GENERATE]
-    assert [c["max_tokens"] for c in llm.calls] == [120, 100, 600]
-    assert [c["schema"] is not None for c in llm.calls] == [False, True, True]
+    assert [c["system"] for c in llm.calls] == [prompts.GRADE, prompts.GENERATE]
+    assert [c["max_tokens"] for c in llm.calls] == [100, 600]
+    assert [c["schema"] is not None for c in llm.calls] == [True, True]
     assert (result.usage.llm_calls, result.usage.input_tokens, result.usage.output_tokens) == (
-        3,
-        300,
-        30,
+        2,
+        200,
+        20,
     )
+
+
+def test_retrieval_uses_the_question_not_a_model_rewrite_by_default(tmp_path):
+    dense = FakeDense()
+    result = make_pipeline(tmp_path, dense=dense).ask(QUESTION)
+    assert dense.queries == [QUESTION]
+    assert result.query == QUESTION
+
+
+def test_the_rewrite_is_a_third_call_and_its_query_is_what_is_searched(tmp_path):
+    dense, llm = FakeDense(), FakeLLM(rewrite="stationary noise limit EMU")
+    result = make_pipeline(tmp_path, llm=llm, dense=dense, rewrite=True).ask(QUESTION)
+    assert [c["system"] for c in llm.calls][0] == prompts.REWRITE
+    assert [c["max_tokens"] for c in llm.calls][0] == 120
+    assert dense.queries == ["stationary noise limit EMU"]
+    assert result.query == "stationary noise limit EMU"
+    assert result.usage.llm_calls == 3
+
+
+def test_the_generator_is_told_how_many_passages_it_may_cite(tmp_path):
+    llm = FakeLLM(grade={"relevant": [1, 2]})
+    make_pipeline(tmp_path, llm=llm).ask(QUESTION)
+    generate = [c for c in llm.calls if c["system"] == prompts.GENERATE][0]
+    assert "numbered [1] to [2]" in generate["user"]
+    assert "Cite only the passage numbers you were given" in prompts.GENERATE
 
 
 def test_response_has_the_rail_assistant_shape(tmp_path):
@@ -50,19 +75,29 @@ def test_masked_question_is_what_the_model_sees(tmp_path):
     masked = GuardrailResult(
         True, False, "My email is {EMAIL}. Noise?", ["pii:EMAIL:ANONYMIZED"], 1
     )
-    llm = FakeLLM()
-    make_pipeline(tmp_path, llm=llm, guardrail=FakeGuardrail(input_result=masked)).ask(
+    llm, dense = FakeLLM(), FakeDense()
+    make_pipeline(tmp_path, llm=llm, dense=dense, guardrail=FakeGuardrail(input_result=masked)).ask(
         "My email is a@b.pt. Noise?"
     )
-    assert llm.calls[0]["user"] == "My email is {EMAIL}. Noise?"
+    assert dense.queries == ["My email is {EMAIL}. Noise?"]  # the address is never embedded
+    assert llm.calls and all("{EMAIL}" in c["user"] for c in llm.calls)
     assert all("a@b.pt" not in c["user"] for c in llm.calls)
 
 
-def test_low_retrieval_score_refuses_after_the_rewrite_only(tmp_path):
+def test_low_retrieval_score_refuses_before_any_model_call(tmp_path):
     llm = FakeLLM()
     result = make_pipeline(tmp_path, llm=llm, dense=FakeDense(unit(-1, -0.1))).ask(QUESTION)
     assert result.refusal_reason == "low_retrieval_score"
     assert result.answer == prompts.REFUSAL
+    assert llm.calls == []
+
+
+def test_low_retrieval_score_with_the_rewrite_on_costs_one_call(tmp_path):
+    llm = FakeLLM()
+    result = make_pipeline(tmp_path, llm=llm, dense=FakeDense(unit(-1, -0.1)), rewrite=True).ask(
+        QUESTION
+    )
+    assert result.refusal_reason == "low_retrieval_score"
     assert len(llm.calls) == 1
 
 
@@ -147,7 +182,7 @@ def test_log_record_holds_measurements_but_no_text(tmp_path):
     result = make_pipeline(tmp_path).ask(QUESTION, trace_id="t1")
     record = json.dumps(result.log_record())
     assert "65 dB" not in record and "noise" not in record.lower()
-    assert result.log_record()["llm_calls"] == 3
+    assert result.log_record()["llm_calls"] == 2
 
 
 def test_passage_numbers_tolerates_drift():

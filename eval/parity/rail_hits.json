@@ -1,0 +1,785 @@
+{
+ "source": "rail-regulation-rag eval/results/latest.json (Qdrant, hybrid, k=8, bge-small-en-v1.5), commit 097bfba",
+ "items": [
+  {
+   "id": "q01",
+   "question": "What is the stationary noise limit LpAeq,T for an electric multiple unit (EMU)?",
+   "query": "stationary noise limit LpAeq,T electric multiple unit EMU rolling stock noise NOI",
+   "hits": [
+    {
+     "passage_id": "tsi-noi:Annex §4.2.1#1",
+     "score": 0.8522
+    },
+    {
+     "passage_id": "tsi-noi:Annex §4.2.3#1",
+     "score": 0.805
+    },
+    {
+     "passage_id": "tsi-noi:Annex §4.2.4#1",
+     "score": 0.7926
+    },
+    {
+     "passage_id": "tsi-noi:Annex §6.2.2.3.2.1#1",
+     "score": 0.7757
+    },
+    {
+     "passage_id": "tsi-noi:Annex §4.2.2#1",
+     "score": 0.7718
+    },
+    {
+     "passage_id": "tsi-noi:Annex §6.2.2.3.2.1#2",
+     "score": 0.7488
+    },
+    {
+     "passage_id": "tsi-noi:Annex §7.2.1#1",
+     "score": 0.7463
+    },
+    {
+     "passage_id": "tsi-noi:Annex §4.2#1",
+     "score": 0.7459
+    }
+   ]
+  },
+  {
+   "id": "q02",
+   "question": "What is the pass-by noise limit for freight wagons at 80 km/h?",
+   "query": "pass-by noise limit freight wagons 80 km/h technical specifications for interoperability rolling stock noise NOI",
+   "hits": [
+    {
+     "passage_id": "tsi-noi:Annex §4.2.3#1",
+     "score": 0.8777
+    },
+    {
+     "passage_id": "tsi-noi:Annex#1",
+     "score": 0.8467
+    },
+    {
+     "passage_id": "tsi-noi:Appendix B#1",
+     "score": 0.8429
+    },
+    {
+     "passage_id": "tsi-noi:Annex §6.2.3#2",
+     "score": 0.836
+    },
+    {
+     "passage_id": "tsi-noi:Annex §(b) Specific case Sweden#1",
+     "score": 0.8353
+    },
+    {
+     "passage_id": "tsi-noi:Annex §4.2.1#1",
+     "score": 0.8246
+    },
+    {
+     "passage_id": "tsi-noi:Annex §6.2.2.3.2.2#1",
+     "score": 0.8194
+    },
+    {
+     "passage_id": "tsi-noi:Annex §4.2#1",
+     "score": 0.8102
+    }
+   ]
+  },
+  {
+   "id": "q03",
+   "question": "How wide must an escape walkway in a railway tunnel be, and how much headroom must it have?",
+   "query": "escape walkway width headroom railway tunnel safety in railway tunnels SRT",
+   "hits": [
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.6#1",
+     "score": 0.8134
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.5.2#1",
+     "score": 0.7838
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.5.1#1",
+     "score": 0.759
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.5.5#1",
+     "score": 0.7557
+    },
+    {
+     "passage_id": "tsi-srt:Annex §2.4#1",
+     "score": 0.7524
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.7#3",
+     "score": 0.7355
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.5.4#1",
+     "score": 0.7347
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.7#1",
+     "score": 0.731
+    }
+   ]
+  },
+  {
+   "id": "q04",
+   "question": "For how long must the emergency lighting on tunnel escape routes keep working after the main power supply fails?",
+   "query": "emergency lighting tunnel escape routes main power supply fails duration safety in railway tunnels SRT",
+   "hits": [
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.5.4#1",
+     "score": 0.807
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.10#1",
+     "score": 0.7889
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.9#1",
+     "score": 0.7801
+    },
+    {
+     "passage_id": "tsi-srt:Annex#1",
+     "score": 0.7502
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.4.4#1",
+     "score": 0.7424
+    },
+    {
+     "passage_id": "tsi-srt:Annex §2.2.2#1",
+     "score": 0.7356
+    },
+    {
+     "passage_id": "tsi-srt:Annex §2.2#1",
+     "score": 0.7312
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.5.5#1",
+     "score": 0.7288
+    }
+   ]
+  },
+  {
+   "id": "q05",
+   "question": "What is the maximum distance between evacuation and rescue points in a tunnel for Category A and for Category B passenger rolling stock, and what is the difference between the two categories?",
+   "query": "maximum distance between evacuation and rescue points in a tunnel for Category A and Category B passenger rolling stock difference between Category A and Category B TSI SRT safety in railway tunnels",
+   "hits": [
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.7#1",
+     "score": 0.8609
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.4.6#2",
+     "score": 0.8277
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.3#1",
+     "score": 0.8238
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.4.6#1",
+     "score": 0.8141
+    },
+    {
+     "passage_id": "tsi-srt:Annex §2.4#1",
+     "score": 0.8099
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.7#3",
+     "score": 0.8023
+    },
+    {
+     "passage_id": "tsi-srt:Annex §7#1",
+     "score": 0.7925
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.7#2",
+     "score": 0.788
+    }
+   ]
+  },
+  {
+   "id": "q06",
+   "question": "How many wheelchair spaces must a 250 m long passenger unit have?",
+   "query": "wheelchair spaces passenger unit length 250 m persons with reduced mobility TSI",
+   "hits": [
+    {
+     "passage_id": "tsi-prm:Annex §4.2.2.2#1",
+     "score": 0.8492
+    },
+    {
+     "passage_id": "tsi-prm:Annex §4.2.2.2#3",
+     "score": 0.7878
+    },
+    {
+     "passage_id": "tsi-prm:Annex §Specific Case France ‘P’ for the ‘Ile de France’ network#1",
+     "score": 0.7739
+    },
+    {
+     "passage_id": "tsi-prm:Annex §4.2.2.2#2",
+     "score": 0.7717
+    },
+    {
+     "passage_id": "tsi-prm:Appendix F §Wheelchair spaces#1",
+     "score": 0.7613
+    },
+    {
+     "passage_id": "tsi-prm:Appendix M §M.2 CHARACTERISTICS#1",
+     "score": 0.7515
+    },
+    {
+     "passage_id": "tsi-prm:Annex §4.4.2.18#1",
+     "score": 0.7504
+    },
+    {
+     "passage_id": "tsi-prm:Annex §4.2.1.1#1",
+     "score": 0.7469
+    }
+   ]
+  },
+  {
+   "id": "q07",
+   "question": "What is the minimum clear usable width of exterior passenger doors, and of wheelchair access doors with level access?",
+   "query": "minimum clear usable width exterior passenger doors wheelchair access doors level access persons with reduced mobility PRM TSI",
+   "hits": [
+    {
+     "passage_id": "tsi-prm:Annex §4.2.2.3.2#1",
+     "score": 0.8796
+    },
+    {
+     "passage_id": "tsi-prm:Annex §4.2.1.3#1",
+     "score": 0.8656
+    },
+    {
+     "passage_id": "tsi-prm:Annex §4.2.2.3.3#1",
+     "score": 0.8445
+    },
+    {
+     "passage_id": "tsi-prm:Annex §4.2.2.6#1",
+     "score": 0.7958
+    },
+    {
+     "passage_id": "tsi-prm:Annex §5.3.2.3#1",
+     "score": 0.792
+    },
+    {
+     "passage_id": "tsi-prm:Appendix E §E.2 CHARACTERISTICS AND MODULES#2",
+     "score": 0.7721
+    },
+    {
+     "passage_id": "tsi-prm:Annex §4.2.2#1",
+     "score": 0.7704
+    },
+    {
+     "passage_id": "tsi-prm:Annex §3#3",
+     "score": 0.7672
+    }
+   ]
+  },
+  {
+   "id": "q08",
+   "question": "Which traction power supply systems does the Energy TSI allow, and which may be used on new lines faster than 250 km/h?",
+   "query": "Energy TSI traction power supply systems allowed new lines faster than 250 km/h",
+   "hits": [
+    {
+     "passage_id": "tsi-ene:Annex §7.1.1#1",
+     "score": 0.7683
+    },
+    {
+     "passage_id": "tsi-ene:Annex §7.2#1",
+     "score": 0.7654
+    },
+    {
+     "passage_id": "tsi-ene:Annex §4.3.2#1",
+     "score": 0.752
+    },
+    {
+     "passage_id": "tsi-ene:Annex#1",
+     "score": 0.7486
+    },
+    {
+     "passage_id": "tsi-ene:Annex §2.1#1",
+     "score": 0.7477
+    },
+    {
+     "passage_id": "tsi-ene:Annex §2.1.1#1",
+     "score": 0.7368
+    },
+    {
+     "passage_id": "tsi-ene:Annex §4.2.2#1",
+     "score": 0.7289
+    },
+    {
+     "passage_id": "tsi-ene:Annex §7.3.1#1",
+     "score": 0.7271
+    }
+   ]
+  },
+  {
+   "id": "q09",
+   "question": "What are the Class A train protection and radio systems under the CCS TSI?",
+   "query": "Class A train protection and radio systems control-command and signalling CCS TSI",
+   "hits": [
+    {
+     "passage_id": "tsi-ccs:Annex I §2.2#1",
+     "score": 0.8742
+    },
+    {
+     "passage_id": "tsi-ccs:Annex I §4.1.2#1",
+     "score": 0.8461
+    },
+    {
+     "passage_id": "tsi-ccs:Appendix H §— Current status of deployment for Class A train protection system#1",
+     "score": 0.8337
+    },
+    {
+     "passage_id": "tsi-ccs:Annex II §1#1",
+     "score": 0.8265
+    },
+    {
+     "passage_id": "tsi-ccs:Appendix H §2.1.1#1",
+     "score": 0.8181
+    },
+    {
+     "passage_id": "tsi-ccs:Annex I §4.1.3#1",
+     "score": 0.814
+    },
+    {
+     "passage_id": "tsi-ccs:Annex I §1.1#1",
+     "score": 0.8137
+    },
+    {
+     "passage_id": "tsi-ccs:Annex I §4.1.1#1",
+     "score": 0.8129
+    }
+   ]
+  },
+  {
+   "id": "q10",
+   "question": "How must the rear end of a passenger train and of a freight train be signalled?",
+   "query": "rear end signal passenger train freight train marker board tail lamp OPE TSI",
+   "hits": [
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.1.3.1#1",
+     "score": 0.8131
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.1.3.2#1",
+     "score": 0.8077
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.1.3#1",
+     "score": 0.8033
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.1.2#1",
+     "score": 0.7639
+    },
+    {
+     "passage_id": "tsi-ope:Annex §7.2.2.4#1",
+     "score": 0.7493
+    },
+    {
+     "passage_id": "tsi-ope:Annex §7.2.2.1#1",
+     "score": 0.7491
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.1.1#1",
+     "score": 0.7277
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.8#1",
+     "score": 0.7224
+    }
+   ]
+  },
+  {
+   "id": "q11",
+   "question": "From when must freight trains with reflective plates as the rear-end signal be accepted in Portugal, and across the whole EU network?",
+   "query": "freight trains reflective plates rear-end signal Portugal EU network acceptance date operation and traffic management TSI OPE",
+   "hits": [
+    {
+     "passage_id": "tsi-ope:Annex §Phasing out:#1",
+     "score": 0.8527
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.1.3.2#1",
+     "score": 0.8336
+    },
+    {
+     "passage_id": "tsi-ope:Annex §7.2.2.1#1",
+     "score": 0.8265
+    },
+    {
+     "passage_id": "tsi-ope:Annex §7.2.2.4#1",
+     "score": 0.7865
+    },
+    {
+     "passage_id": "tsi-ope:Annex §Specific cases:#1",
+     "score": 0.7804
+    },
+    {
+     "passage_id": "tsi-ope:Annex §Cooperation with neighbouring countries:#1",
+     "score": 0.7788
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.1.3#1",
+     "score": 0.7619
+    },
+    {
+     "passage_id": "tsi-ope:Annex §7.2.2.2#1",
+     "score": 0.7515
+    }
+   ]
+  },
+  {
+   "id": "q12",
+   "question": "How quickly must the Agency handle an application for a vehicle authorisation for placing on the market?",
+   "query": "Directive (EU) 2016/797 vehicle authorisation for placing on the market application time limit Agency handle",
+   "hits": [
+    {
+     "passage_id": "iop-directive:Article 21#1",
+     "score": 0.8371
+    },
+    {
+     "passage_id": "iop-directive:Article 21#3",
+     "score": 0.8212
+    },
+    {
+     "passage_id": "iop-directive:Article 21#4",
+     "score": 0.8127
+    },
+    {
+     "passage_id": "iop-directive:Article 21#8",
+     "score": 0.8111
+    },
+    {
+     "passage_id": "iop-directive:Article 21#5",
+     "score": 0.8109
+    },
+    {
+     "passage_id": "iop-directive:Article 21#10",
+     "score": 0.8081
+    },
+    {
+     "passage_id": "iop-directive:Article 21#11",
+     "score": 0.8071
+    },
+    {
+     "passage_id": "iop-directive:Article 26#4",
+     "score": 0.8069
+    }
+   ]
+  },
+  {
+   "id": "q13",
+   "question": "How long does the Commission have to decide on a Member State's request not to apply a TSI, and what happens if it does not decide in time?",
+   "query": "Directive (EU) 2016/797 non-application of technical specifications for interoperability TSI Commission decision time limit deadline Member State request",
+   "hits": [
+    {
+     "passage_id": "iop-directive:Article 11#2",
+     "score": 0.8005
+    },
+    {
+     "passage_id": "tsi-prm:Article 4#1",
+     "score": 0.7898
+    },
+    {
+     "passage_id": "iop-directive:Annex V §(referred to in Article 57)#1",
+     "score": 0.7866
+    },
+    {
+     "passage_id": "iop-directive:Article 7#2",
+     "score": 0.7817
+    },
+    {
+     "passage_id": "tsi-noi:Annex §1#1",
+     "score": 0.7794
+    },
+    {
+     "passage_id": "iop-directive:Article 16#1",
+     "score": 0.7785
+    },
+    {
+     "passage_id": "iop-directive:Article 7#3",
+     "score": 0.7783
+    },
+    {
+     "passage_id": "tsi-ope:Article 3#1",
+     "score": 0.7777
+    }
+   ]
+  },
+  {
+   "id": "q14",
+   "question": "What minimum clear opening must the doors between a tunnel escape walkway and the safe area have?",
+   "query": "tunnel escape walkway safe area door minimum clear opening width height SRT technical specification for interoperability",
+   "hits": [
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.6#1",
+     "score": 0.8122
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.5.2#1",
+     "score": 0.8057
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.5.5#1",
+     "score": 0.7879
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.5.1#1",
+     "score": 0.7813
+    },
+    {
+     "passage_id": "tsi-srt:Annex §2.4#1",
+     "score": 0.7654
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.1#1",
+     "score": 0.765
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.7#1",
+     "score": 0.7559
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.1.7#3",
+     "score": 0.753
+    }
+   ]
+  },
+  {
+   "id": "q15",
+   "question": "When does an upgraded or renewed vehicle that is already authorised need a new vehicle authorisation for placing on the market?",
+   "query": "Directive (EU) 2016/797 vehicle authorisation for placing on the market upgraded renewed already authorised vehicle",
+   "hits": [
+    {
+     "passage_id": "iop-directive:Article 21#11",
+     "score": 0.836
+    },
+    {
+     "passage_id": "iop-directive:Article 54#1",
+     "score": 0.814
+    },
+    {
+     "passage_id": "iop-directive:Article 21#1",
+     "score": 0.8051
+    },
+    {
+     "passage_id": "iop-directive:Article 21#2",
+     "score": 0.7938
+    },
+    {
+     "passage_id": "iop-directive:Article 26#4",
+     "score": 0.7857
+    },
+    {
+     "passage_id": "iop-directive:Article 22#1",
+     "score": 0.7844
+    },
+    {
+     "passage_id": "iop-directive:Article 21#9",
+     "score": 0.7796
+    },
+    {
+     "passage_id": "iop-directive:Article 21#4",
+     "score": 0.7764
+    }
+   ]
+  },
+  {
+   "id": "q16",
+   "question": "Which language must train crew use for safety-related communication with the staff authorising train movements?",
+   "query": "language train crew safety-related communication staff authorising train movements Operation and Traffic Management TSI OPE",
+   "hits": [
+    {
+     "passage_id": "tsi-ope:Annex §4.2.1.5#1",
+     "score": 0.8986
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.6.1#1",
+     "score": 0.8191
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.4.5#1",
+     "score": 0.8117
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.6.2.1#1",
+     "score": 0.8029
+    },
+    {
+     "passage_id": "tsi-ope:Annex §3.2#2",
+     "score": 0.7908
+    },
+    {
+     "passage_id": "tsi-ope:Appendix C §1#1",
+     "score": 0.7886
+    },
+    {
+     "passage_id": "tsi-ope:Appendix G §3#1",
+     "score": 0.7836
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.6.2.2#1",
+     "score": 0.783
+    }
+   ]
+  },
+  {
+   "id": "q17",
+   "question": "What is the capital of France?",
+   "query": "capital France railway law",
+   "hits": [
+    {
+     "passage_id": "tsi-ccs:Annex I §7.7.2.7#1",
+     "score": 0.6948
+    },
+    {
+     "passage_id": "tsi-ope:Annex §7.1#1",
+     "score": 0.6891
+    },
+    {
+     "passage_id": "tsi-ccs:Annex I §7.7.2.3#2",
+     "score": 0.6889
+    },
+    {
+     "passage_id": "tsi-ope:Annex#4",
+     "score": 0.6874
+    },
+    {
+     "passage_id": "iop-directive:Article 2#5",
+     "score": 0.6814
+    },
+    {
+     "passage_id": "tsi-ope:Appendix B §B1. Fundamental operational principles#1",
+     "score": 0.6813
+    },
+    {
+     "passage_id": "tsi-ope:Annex §Specific cases:#1",
+     "score": 0.6792
+    },
+    {
+     "passage_id": "tsi-ope:Article 5b#1",
+     "score": 0.679
+    }
+   ]
+  },
+  {
+   "id": "q18",
+   "question": "What GDPR obligations apply to railway undertakings that process passenger personal data?",
+   "query": "GDPR General Data Protection Regulation passenger personal data railway undertakings obligations",
+   "hits": [
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.7.2#1",
+     "score": 0.7674
+    },
+    {
+     "passage_id": "tsi-ope:Annex §7.1#1",
+     "score": 0.7344
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.7.1#1",
+     "score": 0.7324
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.5.1#1",
+     "score": 0.7307
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.5.1#2",
+     "score": 0.7199
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.3.4.2.1#2",
+     "score": 0.7197
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.1.2.2#1",
+     "score": 0.7178
+    },
+    {
+     "passage_id": "tsi-ope:Appendix A §6.4.1#1",
+     "score": 0.7158
+    }
+   ]
+  },
+  {
+   "id": "q19",
+   "question": "Which collision scenarios must a locomotive's crashworthiness design withstand?",
+   "query": "locomotive crashworthiness design collision scenarios rolling stock TSI",
+   "hits": [
+    {
+     "passage_id": "tsi-ene:Annex §4.3.2#1",
+     "score": 0.763
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.3.3.1#1",
+     "score": 0.761
+    },
+    {
+     "passage_id": "tsi-noi:Annex#1",
+     "score": 0.7436
+    },
+    {
+     "passage_id": "tsi-srt:Annex#1",
+     "score": 0.7401
+    },
+    {
+     "passage_id": "tsi-prm:Annex §4.4.2.18#1",
+     "score": 0.7392
+    },
+    {
+     "passage_id": "tsi-srt:Annex §4.2.3#1",
+     "score": 0.7391
+    },
+    {
+     "passage_id": "tsi-ccs:Annex I §4.3.2#1",
+     "score": 0.7359
+    },
+    {
+     "passage_id": "tsi-ope:Appendix D §Note:#12",
+     "score": 0.7357
+    }
+   ]
+  },
+  {
+   "id": "q20",
+   "question": "What is the maximum line speed on the Lisbon–Porto line?",
+   "query": "maximum line speed Lisbon Porto line",
+   "hits": [
+    {
+     "passage_id": "tsi-ope:Appendix A §4.2#3",
+     "score": 0.6516
+    },
+    {
+     "passage_id": "tsi-noi:Annex §6.2.2.3.2.1#2",
+     "score": 0.6444
+    },
+    {
+     "passage_id": "tsi-noi:Annex §6.2.2.3.2.2#1",
+     "score": 0.6408
+    },
+    {
+     "passage_id": "tsi-noi:Annex §6.2.2.3.2.1#1",
+     "score": 0.6406
+    },
+    {
+     "passage_id": "tsi-noi:Article 5b#1",
+     "score": 0.6392
+    },
+    {
+     "passage_id": "tsi-ope:Annex §4.2.2.6.2#1",
+     "score": 0.6354
+    },
+    {
+     "passage_id": "tsi-ope:Appendix A §4.2#1",
+     "score": 0.634
+    },
+    {
+     "passage_id": "tsi-noi:Annex §4.2.2#1",
+     "score": 0.6318
+    }
+   ]
+  }
+ ]
+}

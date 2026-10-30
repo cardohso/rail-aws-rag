@@ -6,6 +6,7 @@ variable "name_prefix" {
 variable "alert_email" {
   description = "Address that receives the budget alerts."
   type        = string
+  sensitive   = true # plans in public CI logs must not print it
 }
 
 variable "limit_usd" {

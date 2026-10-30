@@ -1,0 +1,34 @@
+name: build
+description: >
+  Install the project, build the retrieval index and the Lambda zip. Both caches are keyed on
+  the inputs, so an unchanged corpus is not re-embedded.
+runs:
+  using: composite
+  steps:
+    - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+      with:
+        python-version: "3.12"
+        enable-cache: true
+    - shell: bash
+      run: uv sync --frozen
+    - name: Cache embedding models
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ~/.cache/fastembed
+        key: fastembed-${{ hashFiles('src/rail_aws_rag/embeddings.py', 'uv.lock') }}
+    - name: Cache the index
+      id: index
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: build/index
+        key: index-${{ hashFiles('data/**', 'src/rail_aws_rag/corpus.py', 'src/rail_aws_rag/embeddings.py', 'src/rail_aws_rag/index.py', 'src/rail_aws_rag/build_index.py', 'uv.lock') }}
+    - name: Build the index
+      if: steps.index.outputs.cache-hit != 'true'
+      shell: bash
+      run: uv run python -m rail_aws_rag.build_index
+    - name: Download the models (on an index cache hit they are not loaded yet)
+      shell: bash
+      run: uv run python -c "from rail_aws_rag.embeddings import LocalEmbedder, BM25Encoder; LocalEmbedder(); BM25Encoder()"
+    - name: Build the Lambda zip
+      shell: bash
+      run: uv run python scripts/build_lambda.py

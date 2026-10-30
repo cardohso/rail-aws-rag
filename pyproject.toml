@@ -17,6 +17,10 @@ dev = [
     "pytest>=9.1.1",
     "ruff>=0.17.1",
 ]
+# The quality gate. goldpass is not on PyPI yet, so it comes from a tagged release of its repo.
+gate = [
+    "goldpass @ git+https://github.com/cardohso/goldpass@v0.2.0",
+]
 
 [build-system]
 requires = ["hatchling"]

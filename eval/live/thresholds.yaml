@@ -1,0 +1,20 @@
+# Pass thresholds for the live gate. They were written BEFORE the first run against the deployed
+# API, from what a usable regulatory assistant needs, not tuned to make the first run pass. Any
+# later change must be justified in the README with the run that prompted it.
+#
+# The rail assistant's own gate uses faithfulness and relevancy judges; this one is deterministic,
+# so it measures what can be checked without a model: which passages are cited, whether they
+# come from the right document, and whether the right questions are refused.
+metrics:
+  hit_rate: {min: 0.80} # an answer cites at least one gold passage: 13 of 16 answerable questions
+  recall_at_k: {min: 0.60} # gold passages that are cited (answers often cite fewer than all of them)
+  grounding: {min: 0.90} # answers cite only passages of the documents the question is about
+  answered_rate: {min: 0.80} # at most 3 of 16 answerable questions wrongly refused
+  refusal_rate: {min: 0.75} # at least 3 of 4 unanswerable questions refused
+  errors: {max: 0} # no request may fail: a 5xx, a timeout or the daily cap is a failure to fix
+tags:
+  wrong-document: # near-identical passages exist in other regulations
+    grounding: {min: 0.66}
+baseline:
+  max_drop: 0.10 # live answers vary between runs, so allow a small drop against the baseline
+  alpha: 0.05 # and only fail if the drop is also statistically significant

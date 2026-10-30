@@ -74,7 +74,7 @@ def test_unknown_route_is_404(pipeline):
 
 def test_model_unavailable_is_503(tmp_path):
     llm = FakeLLM()
-    llm.replies[prompts.REWRITE] = LLMUnavailable("ThrottlingException")
+    llm.replies[prompts.GRADE] = LLMUnavailable("ThrottlingException")
     status, body = call(make_pipeline(tmp_path, llm=llm), "POST", "/ask", {"question": "EMU?"})
     assert status == 503
     assert "try again" in body["error"]
@@ -82,7 +82,7 @@ def test_model_unavailable_is_503(tmp_path):
 
 def test_unexpected_error_is_500_with_the_trace_id(tmp_path):
     llm = FakeLLM()
-    llm.replies[prompts.REWRITE] = FakeClientError("AccessDeniedException")
+    llm.replies[prompts.GRADE] = FakeClientError("AccessDeniedException")
     status, body = call(make_pipeline(tmp_path, llm=llm), "POST", "/ask", {"question": "EMU?"})
     assert status == 500
     assert body["trace_id"] == "req-1"
@@ -95,5 +95,5 @@ def test_request_log_is_one_json_line_without_the_question(pipeline, capsys):
     record = json.loads(line)
     assert record["event"] == "ask"
     assert record["question_chars"] == len(secret)
-    assert record["llm_calls"] == 3
+    assert record["llm_calls"] == 2
     assert "Lisbon" not in line

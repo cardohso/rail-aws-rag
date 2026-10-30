@@ -26,6 +26,9 @@ Rules:
 - Every factual sentence must end with one or more citation markers like [1] or [2][3] that \
 point to the passages supporting it.
 - Quote numbers, limits and units exactly as written in the passages.
+- Cite only the passage numbers you were given. Never invent a number.
+- Every sentence must state a fact that appears in a passage. An answer that only restates the \
+question, or says what "must" be done without the figures, lists or conditions, is not an answer.
 - If the passages do not contain the answer, set "insufficient" to true and leave "answer" empty. \
 Do not use outside knowledge, and do not guess.
 - Be concise: at most 5 sentences.

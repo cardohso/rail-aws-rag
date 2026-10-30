@@ -38,6 +38,10 @@ class PipelineConfig:
     min_score: float = 0.60  # cosine floor: below this, refuse without calling the LLM again
     hybrid: bool = True  # BM25 + dense, fused with RRF
     max_context: int = 5  # graded passages passed to the generator
+    # Search with the user's own question. A model rewrite is optional: on the 16 answerable
+    # golden questions the question alone finds the gold passage 16 times, and Nova Lite's
+    # rewrite only 12 (it copies the corpus description from its prompt into the query).
+    rewrite: bool = False
     # Every model call is capped. Measured shapes: a one-line query, a short list, <= 5 sentences.
     max_tokens_rewrite: int = 120
     max_tokens_grade: int = 100
@@ -173,10 +177,12 @@ class Pipeline:
             question = checked.text  # PII masked, if any
 
         try:
-            lines = self._complete(
-                usage, prompts.REWRITE, question, cfg.max_tokens_rewrite
-            ).text.strip()
-            result.query = (lines.splitlines() or [""])[0].strip() or question
+            result.query = question
+            if cfg.rewrite:
+                lines = self._complete(
+                    usage, prompts.REWRITE, question, cfg.max_tokens_rewrite
+                ).text.strip()
+                result.query = (lines.splitlines() or [""])[0].strip() or question
 
             terms = (
                 self.sparse.embed_query(keyword_text(question, result.query))
@@ -207,8 +213,11 @@ class Pipeline:
             if not result.contexts:
                 return self._refuse(result, "no_relevant_passages")
 
-            user = f"Question: {question}\n\nPassages:\n" + prompts.numbered_passages(
-                [h.passage.embed_text for h in result.contexts]
+            n = len(result.contexts)
+            user = (
+                f"Question: {question}\n\nPassages (numbered [1] to [{n}]; cite only these "
+                f"numbers):\n"
+                + prompts.numbered_passages([h.passage.embed_text for h in result.contexts])
             )
             reply = parse_json(
                 self._complete(

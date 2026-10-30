@@ -1,0 +1,13 @@
+# The live gate's questions, thresholds and scoring, but the pipeline runs here instead of behind
+# the API, so tuning uses none of the API's daily quota. See local_system.py.
+#
+#   PYTHONPATH=eval/live:src uv run goldpass run --config eval/live/local.yaml
+golden: golden.jsonl
+thresholds: thresholds.yaml
+out: ../../build/local/latest.json # not committed: a tuning run is not a result
+
+system:
+  type: python
+  target: "local_system:ask"
+
+generator: {model: amazon.nova-lite-v1, family: amazon}

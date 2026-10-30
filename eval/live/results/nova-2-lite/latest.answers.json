@@ -1,0 +1,389 @@
+{
+  "system": "http:POST https://<api-id>.execute-api.eu-west-1.amazonaws.com/ask",
+  "records": [
+    {
+      "id": "q01",
+      "answer": "The stationary noise limit LpAeq,T for an electric multiple unit (EMU) is 65 dB [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "tsi-noi:Annex §4.2.1#1",
+          "doc_id": "tsi-noi",
+          "text": "The limit values for the following sound pressure levels under normal vehicle conditions concerning the stationary noise allocated to the categories of the rolling stock subsystem are set out in Table 2:\n(a) the A-weighted equivalent continuous sound pressure level of the unit (LpAeq,T[unit]);\n(b) the A-weighted equivalent continuous sound pressure level at the nearest measuring position i considering the main air compressor (Li pAeq,T);\n(c) the AF-weighted sound pressure level at the nearest measuring position i considering impulsive noise of the exhaust valve of the air dryer (Li pAFmax).\nThe limit values are set at a distance of 7,5 m from the centre of the track and 1,2 m above top of rail.\nTable 2\nLimit values for stationary noise\nCategory of the rolling stock subsystem | LpAeq,T[unit] [dB] | Li pAeq,T [dB] | Li pAFmax [dB]\nElectric locomotives and special vehicles with electric traction | 70 | 75 | 85\nDiesel locomotives and special vehicles with diesel traction | 71 | 78\nEMUs | 65 | 68\nDMUs | 72 | 76\nCoaches | 64 | 68\nWagons | 65 | n.a. | n.a.\nThe demonstration of conformity is described in point 6.2.2.1.",
+          "score": 0.8446
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "tsi-noi:Annex §4.2.1#1",
+          "doc_id": "tsi-noi"
+        }
+      ],
+      "latency_s": 3.158,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q02",
+      "answer": "The pass-by noise limit for freight wagons at 80 km/h is 83 dB, normalized to APL = 0.225 [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "tsi-noi:Annex §4.2.3#1",
+          "doc_id": "tsi-noi",
+          "text": "The limit values for the A-weighted equivalent continuous sound pressure level at a speed of 80 km/h (LpAeq,Tp,(80 km/h)) and, if applicable, at 250 km/h (LpAeq,Tp,(250 km/h)) concerning the pass-by noise allocated to the categories of the rolling stock subsystem are set out in Table 4. The limit values are set at a distance of 7,5 m from the centre of the track and 1,2 m above top of rail.\nMeasurements at speeds higher than or equal to 250 km/h shall also be made at the ‘additional measurement position’ with a height of 3,5 m above top of rail in accordance with the specification referenced in Appendix B, Index [1] and assessed against the applicable limit values of Table 4.\nTable 4\nLimit values for pass-by noise\nCategory of the rolling stock subsystem | LpAeq,Tp (80 km/h) [dB] | LpAeq,Tp (250 km/h) [dB]\nElectric locomotives and special vehicles with electric traction | 84 | 99\nDiesel locomotives and special vehicles with diesel traction | 85 | n.a.\nEMUs | 80 | 95\nDMUs | 81 | 96\nCoaches | 79 | n.a.\nWagons (normalised to APL = 0,225) (1) | 83 | n.a.\n(1) APL: the number of axles divided by the length over the buffers (m-1)\nThe demonstration of conformity is described in point 6.2.2.3.",
+          "score": 0.835
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "tsi-noi:Annex §4.2.3#1",
+          "doc_id": "tsi-noi"
+        }
+      ],
+      "latency_s": 2.3,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q03",
+      "answer": "An escape walkway in a railway tunnel must be at least 0.8 m wide, with a minimum vertical clearance of 2.25 m above the walkway [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "tsi-srt:Annex §4.2.1.6#1",
+          "doc_id": "tsi-srt",
+          "text": "This specification applies to all tunnels of more than 0,5 km in length.\n(a) Walkways shall be constructed in a single track tunnel tube on at least one side of the track and in a multiple track tunnel tube on both sides of the tunnel tube. In tunnel tubes with more than two tracks, access to a walkway shall be possible from each track. (1) The width of the walkway shall be at least 0.8 m. (2) The minimum vertical clearance above the walkway shall be 2.25 m. (3) The height of the walkway shall be at bottom -of-rail level or higher. (4) Local constrictions caused by obstacles in the escape area shall be avoided. The presence of obstacles shall not reduce the minimum width to less than 0,7 m, and the length of the obstacle shall not exceed 2 m.\n(b) Continuous handrails shall be installed between 0.8 m and 1.1 m above the walkway providing a route to a safe area. (1) Handrails shall be placed outside the required minimum clearance of the walkway. (2) Handrails shall be angled at 30° to 40° to the longitudinal axis of the tunnel at the entrance to and exit from an obstacle.",
+          "score": 0.8363
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "tsi-srt:Annex §4.2.1.6#1",
+          "doc_id": "tsi-srt"
+        }
+      ],
+      "latency_s": 2.27,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q04",
+      "answer": "The emergency lighting on tunnel escape routes must keep working for an appropriate period of time after the main power supply fails, consistent with the evacuation scenarios and reported in the Emergency Plan [1][2].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "tsi-srt:Annex §4.2.1.5.4#1",
+          "doc_id": "tsi-srt",
+          "text": "This specification applies to all tunnels of more than 0,5 km in length.\n(a) Emergency lighting shall be provided to guide passengers and staff to a safe area in the event of an emergency.\n(b) Illumination shall comply with the following requirements: (1) Single-track tube: on the side of the walkway (2) Multiple-track tube: on both sides of the tube (3) Position of lights: — above the walkway, as low as possible, so as not to interfere with the free space for the passage of persons, or — built into the handrails. (4) The maintained illuminance shall be at least 1 lux at a horizontal plane at walkway level.\n(c) Autonomy and reliability: an alternative electricity supply shall be available for an appropriate period of time after failure of the main supply. The time required shall be consistent with the evacuation scenarios and reported in the Emergency Plan.\n(d) If the emergency light is switched off under normal operating conditions, it shall be possible to switch it on by both of the following means: (1) manually from inside the tunnel at intervals of 250 m (2) by the tunnel operator using remote control",
+          "score": 0.8057
+        },
+        {
+          "id": "tsi-srt:Annex §4.2.1.10#1",
+          "doc_id": "tsi-srt",
+          "text": "This specification applies to all tunnels of more than 1 km length.\n(a) Electrical systems identified by the Infrastructure Manager as vital to the safety of passengers in the tunnel shall be kept in use as long as necessary according to the evacuation scenarios considered in the emergency plan.\n(b) Autonomy and reliability: an alternative electricity supply shall be available for an appropriate period of time after failure of the main supply. The time required shall be consistent with the evacuation scenarios considered and included in the emergency plan.",
+          "score": 0.8065
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "tsi-srt:Annex §4.2.1.5.4#1",
+          "doc_id": "tsi-srt"
+        },
+        {
+          "passage_id": "tsi-srt:Annex §4.2.1.10#1",
+          "doc_id": "tsi-srt"
+        }
+      ],
+      "latency_s": 2.281,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q05",
+      "answer": "The maximum distance between evacuation and rescue points in a tunnel is 5 km for Category A passenger rolling stock and 20 km for Category B passenger rolling stock [1]. The difference between the two categories is 15 km, with Category B allowing a longer distance between evacuation and rescue points [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "tsi-srt:Annex §4.2.1.7#1",
+          "doc_id": "tsi-srt",
+          "text": "This specification applies to all tunnels of more than 1 km in length.\n(a) For the purpose of this clause, two or more consecutive tunnels will be considered as a single tunnel unless both of the following conditions are met: (1) The separation between tunnels in open air is longer than the maximum length of the passenger train intended to be operated on the line + 100 m and (2) The open air area and track situation around the separation between tunnels allow passengers to move away from the train along a a safe space . The open air area shall contain all passengers of the maximum capacity of the train intended to be operated on the line.\n(b) Evacuation and rescue points shall be created (1) Outside both portals of every tunnel of > 1 km and (2) Inside the tunnel, according to the category of rolling stock that is planned to be operated, as summarized in the table below: Rolling stock category according to paragraph 4.2.3 | Maximum distance from the portals to an evacuation and rescue point and between evacuation and rescue points Category A | 5 km Category B | 20 km",
+          "score": 0.8239
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "tsi-srt:Annex §4.2.1.7#1",
+          "doc_id": "tsi-srt"
+        }
+      ],
+      "latency_s": 2.615,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q06",
+      "answer": "A 250 m long passenger unit must have 3 wheelchair spaces [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "tsi-prm:Annex §4.2.2.2#1",
+          "doc_id": "tsi-prm",
+          "text": "(1) According to the length of the unit, excluding the locomotive or power head, there shall be in that unit not less than the number of accessible wheelchair spaces shown in the following table: Table 5 Minimum number of wheelchair spaces per unit length Unit length | Number of wheelchair spaces by unit Less than 30 m | 1 wheelchair space 30 to 205 metres | 2 wheelchair spaces More than 205 to 300 metres | 3 wheelchair spaces More than 300 metres | 4 wheelchair spaces\n(2) To ensure stability, the wheelchair space shall be designed for the wheelchair to be positioned either facing or back to the direction of travel.\n(3) Over the full length of the wheelchair space the width shall be 700 mm from floor level to a minimum height of 1 450 mm with an additional 50 mm width to give clearance for hands on each side that is adjacent to any obstacle that will inhibit clearance for the wheelchair users hands (e.g. wall or structure) from a height of 400 mm to 800 mm above floor level (if one side of the wheelchair is adjacent to the aisle there is no additional 50 mm requirement for that side of the wheelchair as it is already free space).\n(4) The minimum distance in the longitudinal plane between the back of the wheelchair space and the next surface shall be in accordance with the specification referenced in Appendix A, Index [16].",
+          "score": 0.8072
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "tsi-prm:Annex §4.2.2.2#1",
+          "doc_id": "tsi-prm"
+        }
+      ],
+      "latency_s": 2.624,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q07",
+      "answer": "The minimum clear usable width of exterior passenger doors is 800 mm when open [1]. For wheelchair access doors with level access on trains with a design speed lower than 250 km/h, the minimum clear usable width is 1 000 mm when open [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "tsi-prm:Annex §4.2.2.3.2#1",
+          "doc_id": "tsi-prm",
+          "text": "(1) All exterior passenger doorways shall have a minimum clear useable width of 800 mm when open.\n(2) On trains with a design speed lower than 250 km/h, wheelchair access doors offering a level access as defined in point 2.3 shall have a minimum clear useable width of 1 000 mm when open.\n(3) All exterior passenger doorways shall be marked on the outside in a way that gives a contrast to the vehicle body-side surrounding them.\n(4) The designated wheelchair exterior accessible doorways shall be the closest doorways to the designated wheelchair spaces.\n(5) The doors to be used for wheelchair access shall be clearly labelled with a sign in accordance with Appendix N.\n(6) From the inside of the vehicle the position of external doorways shall clearly be marked by use of contrasted adjacent flooring.\n(7) Audible and visible signals shall be given to persons inside and outside the train when doors are operated or about to operate.\n(8) The door operating signals are the following:\n(a) when a door is released for opening, a door opening signal shall be given; it shall last a minimum of 5 seconds unless the door is operated, in which case it may cease after 3 seconds;\n(b) when a door is automatically or remotely opened by the driver or other member of the train crew, a door opening signal shall be given; it shall last a minimum of 3 seconds from the moment that the door starts to open;",
+          "score": 0.8044
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "tsi-prm:Annex §4.2.2.3.2#1",
+          "doc_id": "tsi-prm"
+        }
+      ],
+      "latency_s": 2.342,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q08",
+      "answer": "The Energy TSI allows the following traction power supply systems: AC 25 kV, 50 Hz; AC 15 kV, 16.7 Hz; DC 3 kV; and DC 1.5 kV [1]. For new lines with speeds faster than 250 km/h, only the AC systems listed in point 4.2.3 (a) and (b) may be used, which are AC 25 kV, 50 Hz and AC 15 kV, 16.7 Hz [2][1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "tsi-ene:Annex §4.2.3#1",
+          "doc_id": "tsi-ene",
+          "text": "The nominal voltage and nominal frequency of the traction power supply system shall be one of the four systems:\n(a) AC 25 kV, 50 Hz;\n(b) AC 15 kV, 16,7 Hz;\n(c) DC 3 kV;\n(d) DC 1,5 kV.\nFor new lines with speed greater than 250 km/h, implementation rules are specified in point 7.1.1.",
+          "score": 0.7264
+        },
+        {
+          "id": "tsi-ene:Annex §7.1.1#1",
+          "doc_id": "tsi-ene",
+          "text": "New lines with speed greater than 250 km/h shall be supplied with one of the AC systems listed in point 4.2.3 (a) and (b).",
+          "score": 0.7945
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "tsi-ene:Annex §4.2.3#1",
+          "doc_id": "tsi-ene"
+        },
+        {
+          "passage_id": "tsi-ene:Annex §7.1.1#1",
+          "doc_id": "tsi-ene"
+        }
+      ],
+      "latency_s": 2.545,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q09",
+      "answer": "I can't answer that from the indexed EU railway regulations. The question may be outside their scope, or the answer may be in a document that isn't indexed.",
+      "refused": true,
+      "contexts": [],
+      "retrieved": null,
+      "citations": [],
+      "latency_s": 2.261,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q10",
+      "answer": "I can't answer that from the indexed EU railway regulations. The question may be outside their scope, or the answer may be in a document that isn't indexed.",
+      "refused": true,
+      "contexts": [],
+      "retrieved": null,
+      "citations": [],
+      "latency_s": 1.581,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q11",
+      "answer": "I can't answer that from the indexed EU railway regulations. The question may be outside their scope, or the answer may be in a document that isn't indexed.",
+      "refused": true,
+      "contexts": [],
+      "retrieved": null,
+      "citations": [],
+      "latency_s": 2.458,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q12",
+      "answer": "The Agency must issue the authorisation for placing on the market, or inform the applicant of its negative decision, within four months of receipt of all relevant information [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "iop-directive:Article 21#5",
+          "doc_id": "iop-directive",
+          "text": "6. Within one month of receipt of the applicant's request, the Agency shall inform the applicant that the file is complete or ask for relevant supplementary information, setting a reasonable deadline for the provision thereof. With regard to the completeness, relevance and consistency of the file, the Agency may also assess the elements specified in point (d) of paragraph 3.\nThe Agency shall take full account of the assessments under paragraph 5 before taking its decision on the issuance of the vehicle authorisation for placing on the market. The Agency shall issue the authorisation for placing on the market, or inform the applicant of its negative decision, within a predetermined, reasonable time, and in any case within four months of receipt of all relevant information.\nIn the event of non-application of one or more TSIs or parts of them as referred to in Article 7, the Agency shall issue the vehicle authorisation only after application of the procedure laid down in that Article.\nThe Agency shall take full responsibility for the authorisations it issues.",
+          "score": 0.7874
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "iop-directive:Article 21#5",
+          "doc_id": "iop-directive"
+        }
+      ],
+      "latency_s": 2.532,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q13",
+      "answer": "I can't answer that from the indexed EU railway regulations. The question may be outside their scope, or the answer may be in a document that isn't indexed.",
+      "refused": true,
+      "contexts": [],
+      "retrieved": null,
+      "citations": [],
+      "latency_s": 2.324,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q14",
+      "answer": "The doors giving access from the escape walkway to the safe area shall have a minimum clear opening of 1,4 m wide and 2,0 m high [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "tsi-srt:Annex §4.2.1.5.2#1",
+          "doc_id": "tsi-srt",
+          "text": "This specification applies to all tunnels of more than 1 km in length.\n(a) Safe areas shall be accessible for people who commence self-evacuation from the train as well as for the emergency response services.\n(b) One of the following solutions shall be selected for access points from a train to the safe area: (1) Lateral and/or vertical emergency exits to the surface. These exits shall be provided at least every 1 000 m. (2) Cross-passages between adjacent independent tunnel tubes, which enable the adjacent tunnel tube to be employed as a safe area. Cross-passages shall be provided at least every 500 m. —————\n(c) Doors giving access from the escape walkway to the safe area shall have a minimum clear opening of 1,4 m wide and 2,0 m high. Alternatively it is permitted to use multiple doors next to each other which are less wide as long as the flow capacity of people is demonstrated to be equivalent or higher.\n(d) After passing the doors, the clear width shall continue to be at least 1,5 m wide and 2,25 m high.\n(e) The way in which the emergency response services access the safe area shall be described in the emergency plan.",
+          "score": 0.8183
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "tsi-srt:Annex §4.2.1.5.2#1",
+          "doc_id": "tsi-srt"
+        }
+      ],
+      "latency_s": 2.319,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q15",
+      "answer": "A new vehicle authorisation is required if: (a) changes are made to the values of the parameters referred to in point (b) of paragraph 10 which are outside the range of acceptable parameters as defined in the TSIs; (b) the overall safety level of the vehicle concerned may be adversely affected by the works envisaged; or (c) it is required by the relevant TSIs [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "iop-directive:Article 21#11",
+          "doc_id": "iop-directive",
+          "text": "12. In the event of renewal or upgrading of existing vehicles which already have a vehicle authorisation for placing on the market, a new vehicle authorisation for placing on the market shall be required if: (a) changes are made to the values of the parameters referred to in point (b) of paragraph 10 which are outside the range of acceptable parameters as defined in the TSIs; (b) the overall safety level of the vehicle concerned may be adversely affected by the works envisaged; or (c) it is required by the relevant TSIs.\n13. Where the applicant wishes to extend the area of use of a vehicle which has already been authorised, it shall supplement the file with the relevant documents referred to in paragraph 3 concerning the additional area of use. The applicant shall submit the file to the Agency, which shall, after following the procedures laid down in paragraphs 4 to 7, issue an updated authorisation covering the extended area of use.\nIf the applicant has received a vehicle authorisation in accordance with paragraph 8 and wishes to extend the area of use within that Member State, it shall supplement the file with the relevant documents referred to in paragraph 3 concerning the additional area of use. It shall submit the file to the national safety authority which shall, after following the procedures laid down in paragraph 8, issue an updated authorisation covering the extended area of use.",
+          "score": 0.8516
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "iop-directive:Article 21#11",
+          "doc_id": "iop-directive"
+        }
+      ],
+      "latency_s": 2.741,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q16",
+      "answer": "I can't answer that from the indexed EU railway regulations. The question may be outside their scope, or the answer may be in a document that isn't indexed.",
+      "refused": true,
+      "contexts": [],
+      "retrieved": null,
+      "citations": [],
+      "latency_s": 2.225,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q17",
+      "answer": "I can't answer that from the indexed EU railway regulations. The question may be outside their scope, or the answer may be in a document that isn't indexed.",
+      "refused": true,
+      "contexts": [],
+      "retrieved": null,
+      "citations": [],
+      "latency_s": 1.458,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q18",
+      "answer": "I can't answer that from the indexed EU railway regulations. The question may be outside their scope, or the answer may be in a document that isn't indexed.",
+      "refused": true,
+      "contexts": [],
+      "retrieved": null,
+      "citations": [],
+      "latency_s": 2.341,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q19",
+      "answer": "A locomotive's crashworthiness design must protect passenger and driving compartments in the event of collision or derailment [1].",
+      "refused": false,
+      "contexts": [
+        {
+          "id": "iop-directive:Annex III §2.4.1#1",
+          "doc_id": "iop-directive",
+          "text": "The rolling-stock structures and those of the links between vehicles must be designed in such a way as to protect the passenger and driving compartments in the event of collision or derailment.\nThe electrical equipment must not impair the safety and functioning of the control-command and signalling installations.\nThe braking techniques and the stresses exerted must be compatible with the design of the tracks, engineering structures and signalling systems.\nSteps must be taken to prevent access to electrically-live constituents in order not to endanger the safety of persons.\nIn the event of danger, devices must enable passengers to inform the driver and accompanying staff to contact them.\nThe safety of passengers boarding and alighting from trains must be ensured. The access doors must incorporate an opening and closing system which guarantees passenger safety.\nEmergency exits must be provided and indicated.\nAppropriate provisions must be laid down to take account of the particular safety conditions in very long tunnels.\nAn emergency lighting system having a sufficient intensity and duration is an absolute requirement on board trains.\nTrains must be equipped with a public address system which provides a means of communication to the public from on-board staff.\nPassengers must be given easily understandable and comprehensive information about rules applicable to them both in railway stations and in trains.",
+          "score": 0.7472
+        }
+      ],
+      "retrieved": null,
+      "citations": [
+        {
+          "passage_id": "iop-directive:Annex III §2.4.1#1",
+          "doc_id": "iop-directive"
+        }
+      ],
+      "latency_s": 12.929,
+      "error": null,
+      "extra": {}
+    },
+    {
+      "id": "q20",
+      "answer": "I can't answer that from the indexed EU railway regulations. The question may be outside their scope, or the answer may be in a document that isn't indexed.",
+      "refused": true,
+      "contexts": [],
+      "retrieved": null,
+      "citations": [],
+      "latency_s": 1.268,
+      "error": null,
+      "extra": {}
+    }
+  ]
+}

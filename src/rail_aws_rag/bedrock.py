@@ -164,10 +164,15 @@ class BedrockGuardrail:
 
 def parse_guardrail_response(response: dict, original: str) -> GuardrailResult:
     """Summarise an ApplyGuardrail response. Findings name the policy and type but never the
-    matched text, so they are safe to log."""
+    matched text, so they are safe to log.
+
+    With source=INPUT, ApplyGuardrail only detects PII (action NONE) even when the guardrail is
+    set to ANONYMIZE, and returns no masked text; with source=OUTPUT it masks. So PII reported
+    as NONE is masked here, from the matches in the response."""
     intervened = response.get("action") == "GUARDRAIL_INTERVENED"
     findings: list[str] = []
     blocked = False
+    unmasked: list[tuple[str, str]] = []  # (matched text, entity type), never logged
     for assessment in response.get("assessments", []):
         entries = [
             ("topic", e.get("name"), e) for e in assessment.get("topicPolicy", {}).get("topics", [])
@@ -188,6 +193,9 @@ def parse_guardrail_response(response: dict, original: str) -> GuardrailResult:
             if entry.get("detected") is False:
                 continue  # present only with outputScope=FULL; not a finding
             action = entry.get("action", "")
+            if kind == "pii" and action == "NONE" and entry.get("match"):
+                unmasked.append((entry["match"], label))
+                action = "MASKED"
             findings.append(f"{kind}:{label}:{action}")
             blocked = blocked or action == "BLOCKED"
 
@@ -195,6 +203,8 @@ def parse_guardrail_response(response: dict, original: str) -> GuardrailResult:
     text = original
     if intervened and not blocked and outputs:
         text = "".join(o.get("text", "") for o in outputs)  # anonymised version
+    for match, label in sorted(unmasked, key=lambda m: -len(m[0])):  # longest first
+        text = text.replace(match, f"{{{label}}}")
     usage = response.get("usage", {})
     units = sum(int(v) for k, v in usage.items() if k.endswith("Units") and "Free" not in k)
     return GuardrailResult(intervened, blocked, text, findings, units)

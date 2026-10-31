@@ -83,7 +83,9 @@ resource "aws_bedrock_guardrail" "this" {
       for_each = local.pii
 
       content {
-        type           = pii_entities_config.key
+        type = pii_entities_config.key
+        # ANONYMIZE masks on source=OUTPUT. On source=INPUT, ApplyGuardrail only reports the match
+        # (action NONE); parse_guardrail_response in the Lambda code masks it.
         action         = "ANONYMIZE"
         input_enabled  = pii_entities_config.value.input
         output_enabled = pii_entities_config.value.output

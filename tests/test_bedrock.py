@@ -145,6 +145,40 @@ def test_guardrail_masked_pii_continues_with_the_masked_text_and_never_logs_the_
     assert "a@b.pt" not in " ".join(r.findings)
 
 
+# What the deployed guardrail really returns for source=INPUT (checked 2026-10-31): PII is
+# detected with action NONE, nothing is masked and "outputs" is empty.
+DETECTED_PII_ON_INPUT = {
+    "action": "NONE",
+    "outputs": [],
+    "assessments": [
+        {
+            "sensitiveInformationPolicy": {
+                "piiEntities": [
+                    {"type": "EMAIL", "match": "jane.doe@example.com", "action": "NONE"},
+                    {"type": "NAME", "match": "Maria Silva", "action": "NONE"},
+                ],
+                "regexes": [],
+            }
+        }
+    ],
+}
+
+
+def test_pii_that_guardrails_only_detects_on_input_is_masked_here():
+    question = "I am Maria Silva (jane.doe@example.com). What is the noise limit?"
+    r = parse_guardrail_response(DETECTED_PII_ON_INPUT, question)
+    assert r.text == "I am {NAME} ({EMAIL}). What is the noise limit?"
+    assert r.findings == ["pii:EMAIL:MASKED", "pii:NAME:MASKED"]
+    assert not r.blocked
+    assert "jane.doe" not in " ".join(r.findings)
+
+
+def test_pii_already_masked_by_guardrails_is_not_masked_twice():
+    r = parse_guardrail_response(MASKED_PII, "My email is a@b.pt. What is the noise limit?")
+    assert r.text == "My email is {EMAIL}. What is the noise limit?"
+    assert r.findings == ["pii:EMAIL:ANONYMIZED"]
+
+
 def test_bedrock_guardrail_sends_the_documented_request():
     client = FakeBedrockClient(guardrail=NONE)
     BedrockGuardrail(client, "gr-123", "1").check("hello", "INPUT")

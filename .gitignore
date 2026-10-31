@@ -9,6 +9,8 @@ crash.log
 *.tfvars.json
 !*.tfvars.example
 backend.hcl
+# the local-backend override used once while bootstrapping
+*_override.tf
 
 # Secrets and local config
 .env

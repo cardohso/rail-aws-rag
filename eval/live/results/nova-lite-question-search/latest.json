@@ -1,0 +1,738 @@
+{
+  "goldpass_version": "0.2.0",
+  "meta": {
+    "system": "http:POST https://<api-id>.execute-api.eu-west-1.amazonaws.com/ask",
+    "golden": "eval/live/golden.jsonl",
+    "n_items": 20,
+    "k": null,
+    "generator": {
+      "model": "amazon.nova-lite-v1",
+      "family": "amazon"
+    },
+    "judge_free": true,
+    "allow_same_family": false,
+    "commit": "c7163ba",
+    "timestamp": "2026-10-31T00:12:09Z"
+  },
+  "metrics": {
+    "faithfulness": {
+      "value": null,
+      "n": 0
+    },
+    "answer_relevancy": {
+      "value": null,
+      "n": 0
+    },
+    "precision_at_k": {
+      "value": 0.8438,
+      "n": 16
+    },
+    "recall_at_k": {
+      "value": 0.8854,
+      "n": 16
+    },
+    "context_precision": {
+      "value": 0.9375,
+      "n": 16
+    },
+    "mrr": {
+      "value": 0.9375,
+      "n": 16
+    },
+    "hit_rate": {
+      "value": 0.9375,
+      "n": 16
+    },
+    "retrieved_recall": {
+      "value": null,
+      "n": 0
+    },
+    "grounding": {
+      "value": 1.0,
+      "n": 15
+    },
+    "answered_rate": {
+      "value": 0.9375,
+      "n": 16
+    },
+    "refusal_rate": {
+      "value": 0.75,
+      "n": 4
+    },
+    "errors": {
+      "value": 0.0,
+      "n": 0
+    }
+  },
+  "by_tag": {
+    "wrong-document": {
+      "faithfulness": {
+        "value": null,
+        "n": 0
+      },
+      "answer_relevancy": {
+        "value": null,
+        "n": 0
+      },
+      "precision_at_k": {
+        "value": 1.0,
+        "n": 3
+      },
+      "recall_at_k": {
+        "value": 1.0,
+        "n": 3
+      },
+      "context_precision": {
+        "value": 1.0,
+        "n": 3
+      },
+      "mrr": {
+        "value": 1.0,
+        "n": 3
+      },
+      "hit_rate": {
+        "value": 1.0,
+        "n": 3
+      },
+      "retrieved_recall": {
+        "value": null,
+        "n": 0
+      },
+      "grounding": {
+        "value": 1.0,
+        "n": 3
+      },
+      "answered_rate": {
+        "value": 1.0,
+        "n": 3
+      },
+      "refusal_rate": {
+        "value": null,
+        "n": 0
+      },
+      "errors": {
+        "value": 0.0,
+        "n": 0
+      }
+    }
+  },
+  "by_document": [
+    {
+      "doc_id": "iop-directive",
+      "questions": 3,
+      "answered": 3,
+      "grounding": {
+        "value": 1.0,
+        "n": 3
+      },
+      "cited_other_docs": []
+    },
+    {
+      "doc_id": "tsi-ccs",
+      "questions": 1,
+      "answered": 0,
+      "grounding": {
+        "value": null,
+        "n": 0
+      },
+      "cited_other_docs": []
+    },
+    {
+      "doc_id": "tsi-ene",
+      "questions": 1,
+      "answered": 1,
+      "grounding": {
+        "value": 1.0,
+        "n": 1
+      },
+      "cited_other_docs": []
+    },
+    {
+      "doc_id": "tsi-noi",
+      "questions": 2,
+      "answered": 2,
+      "grounding": {
+        "value": 1.0,
+        "n": 2
+      },
+      "cited_other_docs": []
+    },
+    {
+      "doc_id": "tsi-ope",
+      "questions": 3,
+      "answered": 3,
+      "grounding": {
+        "value": 1.0,
+        "n": 3
+      },
+      "cited_other_docs": []
+    },
+    {
+      "doc_id": "tsi-prm",
+      "questions": 2,
+      "answered": 2,
+      "grounding": {
+        "value": 1.0,
+        "n": 2
+      },
+      "cited_other_docs": []
+    },
+    {
+      "doc_id": "tsi-srt",
+      "questions": 4,
+      "answered": 4,
+      "grounding": {
+        "value": 1.0,
+        "n": 4
+      },
+      "cited_other_docs": []
+    }
+  ],
+  "judges": [],
+  "skipped": {},
+  "items": [
+    {
+      "id": "q01",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-noi"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-noi"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q02",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-noi"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-noi"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q03",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-srt"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-srt"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q04",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-srt"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-srt"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 0.5,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q05",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-srt"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-srt"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 0.5,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q06",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-prm"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-prm"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q07",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-prm"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-prm"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 0.5,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q08",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-ene"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-ene"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q09",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-ccs"
+      ],
+      "refused": true,
+      "cited_docs": [],
+      "metrics": {
+        "answered_rate": false,
+        "precision_at_k": 0.0,
+        "recall_at_k": 0.0,
+        "context_precision": 0.0,
+        "mrr": 0.0,
+        "hit_rate": false
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q10",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-ope"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-ope"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 0.6666666666666666,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q11",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "tsi-ope"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-ope"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q12",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "iop-directive"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "iop-directive"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 0.5,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q13",
+      "expected": "answer",
+      "tags": [],
+      "source_doc_ids": [
+        "iop-directive"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "iop-directive"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q14",
+      "expected": "answer",
+      "tags": [
+        "wrong-document"
+      ],
+      "source_doc_ids": [
+        "tsi-srt"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-srt"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q15",
+      "expected": "answer",
+      "tags": [
+        "wrong-document"
+      ],
+      "source_doc_ids": [
+        "iop-directive"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "iop-directive"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q16",
+      "expected": "answer",
+      "tags": [
+        "wrong-document"
+      ],
+      "source_doc_ids": [
+        "tsi-ope"
+      ],
+      "refused": false,
+      "cited_docs": [
+        "tsi-ope"
+      ],
+      "metrics": {
+        "answered_rate": true,
+        "precision_at_k": 1.0,
+        "recall_at_k": 1.0,
+        "context_precision": 1.0,
+        "mrr": 1.0,
+        "hit_rate": true,
+        "grounding": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q17",
+      "expected": "refuse",
+      "tags": [],
+      "source_doc_ids": [],
+      "refused": true,
+      "cited_docs": [],
+      "metrics": {
+        "refusal_rate": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q18",
+      "expected": "refuse",
+      "tags": [],
+      "source_doc_ids": [],
+      "refused": true,
+      "cited_docs": [],
+      "metrics": {
+        "refusal_rate": true
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q19",
+      "expected": "refuse",
+      "tags": [],
+      "source_doc_ids": [],
+      "refused": false,
+      "cited_docs": [],
+      "metrics": {
+        "refusal_rate": false
+      },
+      "notes": [],
+      "error": null
+    },
+    {
+      "id": "q20",
+      "expected": "refuse",
+      "tags": [],
+      "source_doc_ids": [],
+      "refused": true,
+      "cited_docs": [],
+      "metrics": {
+        "refusal_rate": true
+      },
+      "notes": [],
+      "error": null
+    }
+  ],
+  "gate": {
+    "passed": true,
+    "failures": [],
+    "fragile": [
+      "refusal_rate (all)"
+    ],
+    "checks": [
+      {
+        "metric": "hit_rate",
+        "scope": "all",
+        "value": 0.9375,
+        "n": 16,
+        "rule": "≥ 0.8",
+        "ok": true,
+        "message": "ok",
+        "worst": [],
+        "ci": [
+          0.7167,
+          0.9889
+        ],
+        "margin": 3,
+        "fragile": false
+      },
+      {
+        "metric": "recall_at_k",
+        "scope": "all",
+        "value": 0.8854,
+        "n": 16,
+        "rule": "≥ 0.6",
+        "ok": true,
+        "message": "ok",
+        "worst": [],
+        "ci": [
+          0.652,
+          0.9696
+        ],
+        "margin": 5,
+        "fragile": false
+      },
+      {
+        "metric": "grounding",
+        "scope": "all",
+        "value": 1.0,
+        "n": 15,
+        "rule": "≥ 0.9",
+        "ok": true,
+        "message": "ok",
+        "worst": [],
+        "ci": [
+          0.7961,
+          1.0
+        ],
+        "margin": 2,
+        "fragile": false
+      },
+      {
+        "metric": "answered_rate",
+        "scope": "all",
+        "value": 0.9375,
+        "n": 16,
+        "rule": "≥ 0.8",
+        "ok": true,
+        "message": "ok",
+        "worst": [],
+        "ci": [
+          0.7167,
+          0.9889
+        ],
+        "margin": 3,
+        "fragile": false
+      },
+      {
+        "metric": "refusal_rate",
+        "scope": "all",
+        "value": 0.75,
+        "n": 4,
+        "rule": "≥ 0.75",
+        "ok": true,
+        "message": "ok",
+        "worst": [],
+        "ci": [
+          0.3006,
+          0.9544
+        ],
+        "margin": 1,
+        "fragile": true
+      },
+      {
+        "metric": "errors",
+        "scope": "all",
+        "value": 0.0,
+        "n": 0,
+        "rule": "≤ 0",
+        "ok": true,
+        "message": "ok",
+        "worst": [],
+        "ci": null,
+        "margin": 1,
+        "fragile": false
+      },
+      {
+        "metric": "grounding",
+        "scope": "tag:wrong-document",
+        "value": 1.0,
+        "n": 3,
+        "rule": "≥ 0.66",
+        "ok": true,
+        "message": "ok",
+        "worst": [],
+        "ci": [
+          0.4385,
+          1.0
+        ],
+        "margin": 2,
+        "fragile": false
+      }
+    ],
+    "baseline": null,
+    "baseline_missing": "eval/live/baseline.json"
+  }
+}

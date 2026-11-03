@@ -23,12 +23,13 @@ env:
 
 jobs:
   python:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
+          version: "0.13.6"
           python-version: "3.12"
           enable-cache: true
       - run: uv sync --frozen
@@ -37,7 +38,7 @@ jobs:
       - run: uv run pytest # offline: Bedrock, Guardrails, S3 and DynamoDB are faked
 
   terraform-static:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -62,6 +63,8 @@ jobs:
             tflint --chdir "$dir" --config "$GITHUB_WORKSPACE/.tflint.hcl"
           done
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          version: "0.13.6"
       - name: checkov (IaC security scan)
         run: uvx --from checkov==3.3.30 checkov -d infra --quiet --compact
 
@@ -69,7 +72,7 @@ jobs:
     # Forked pull requests get no OIDC token, so they stop at the checks above.
     if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
     needs: [python, terraform-static]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
       contents: read

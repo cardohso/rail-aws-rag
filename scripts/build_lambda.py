@@ -48,16 +48,16 @@ def run(cmd: list[str]) -> None:
 
 def install_dependencies(target: Path) -> None:
     requirements = BUILD / "lambda-requirements.txt"
+    # The versions in uv.lock, the ones the tests ran against. `uv pip compile` would resolve
+    # the newest releases on every build, so the zip changed whenever a dependency was released.
     run(
         [
             "uv",
-            "pip",
-            "compile",
-            str(REPO / "pyproject.toml"),
-            "--python-platform",
-            PLATFORM,
-            "--python-version",
-            PYTHON_VERSION,
+            "export",
+            "--frozen",
+            "--no-dev",
+            "--no-hashes",
+            "--no-emit-project",
             "--no-header",
             "--quiet",
             "-o",

@@ -11,7 +11,7 @@ A question-answering service over EU railway law, provisioned on AWS with Terraf
 - **What it does:** `POST /ask` with a question about the Interoperability Directive or 6 rail TSIs. It returns an answer that cites the articles it used, or a refusal that names its reason.
 - **How it works:** the search index (1,589 passages, built offline) is held in Lambda memory. Retrieval combines BM25 and dense search. Amazon Nova Lite writes the answer. A Bedrock Guardrail checks the question and the answer.
 - **How it is deployed:** everything is in Terraform. GitHub Actions deploys through OIDC, with no stored AWS keys, and every apply needs a manual approval.
-- **What it costs:** nothing is billed by the hour; every component is pay-per-request. The measured monthly cost is pending (see [Cost](#cost)). Destroyed, the stack costs 0.
+- **What it costs:** nothing is billed by the hour; every component is pay-per-request. Measured: 0.054 USD gross over its first 4 days, almost all of it test runs. At the daily cap it cannot exceed about 1.75 USD a month (see [Cost](#cost)). Destroyed, it costs 0.
 - **How good it is:** the [goldpass](https://github.com/cardohso/goldpass) gate passes against the live API, with hit rate 0.94, answered rate 0.94, grounding 1.00 and refusal rate 0.75. Read [Limitations](#limitations) before trusting those numbers.
 
 ## Architecture
@@ -155,21 +155,31 @@ The bootstrap destroy has not been run.
 
 ## Cost
 
-> **Measured cost: pending.** The stack has run since 2026-10-31. The table below gets Cost Explorer's figures, gross before the account's Free plan credits, once there are a few days of data. No number here is an estimate presented as a measurement.
+Read from Cost Explorer on 2026-11-03, **gross, before credits**. The account's Free plan credits covered all of it, so the net bill is 0. The last days are still marked "estimated" by AWS.
 
-| Service | Measured (USD, period) |
+**Measured: gross cost per service, 2026-10-31 to 2026-11-03** (the days the stack has been live):
+
+| Service | USD |
 |---|---|
-| Bedrock (Nova Lite) | _pending_ |
-| Bedrock Guardrails | _pending_ |
-| Lambda, API Gateway, DynamoDB, S3, CloudWatch | _pending_ |
-| **Total** | _pending_ |
+| Bedrock (Nova Lite and Guardrails) | 0.0531 |
+| S3 | 0.0011 |
+| API Gateway | 0.0001 |
+| DynamoDB | 0.0000 |
+| Lambda, CloudWatch, SNS | 0.0000 |
+| **Total** | **0.0542** |
 
-**Measured so far: usage per question**, from the Lambda logs of the Guardrail test:
+Almost all of it is 31 October (0.054), the day of the gate runs and the Guardrail tests. The two days after it, with no traffic, cost 0.0002 and 0.0001, all S3. An idle stack costs under 0.01 USD a month.
 
-| Request | Model calls | Input tokens | Output tokens | Guardrail text units |
-|---|---|---|---|---|
-| Answered question | 2 | 3,890 to 5,072 | 59 to 63 | 6 |
-| Blocked by the Guardrail | 0 | 0 | 0 | 3 |
+**Measured: cost per question.** Billed rates come from Cost Explorer, token and unit counts from the Lambda logs of the Guardrail test.
+
+| Request | Nova Lite | Guardrail | Total |
+|---|---|---|---|
+| Answered question (2 model calls, 3,890 to 5,072 input and 59 to 63 output tokens, 6 Guardrail units) | 0.0003 to 0.0004 | 0.0008 | **0.0011 to 0.0012** |
+| Blocked by the Guardrail (0 model calls, 3 units) | 0 | 0.0004 | **0.0004** |
+
+The Guardrail is about 70% of the cost of an answered question. Nova 2 Lite costs about 5 times more per input token than Nova Lite (0.00037 against 0.00007 USD per 1,000 tokens).
+
+**Computed, not measured: the ceiling.** The service has had no real traffic, so there is no measured monthly figure. The daily cap bounds it: 50 answered questions a day at 0.0012 is about 0.06 USD a day, or **1.75 USD over 30 days**, under the 5 USD target. Update this section if real traffic shows otherwise.
 
 **How spend is capped:**
 - **Nothing is billed by the hour.** There is no OpenSearch Serverless, NAT gateway, EC2, RDS or provisioned concurrency.

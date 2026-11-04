@@ -258,6 +258,7 @@ Both early runs failed for the same reason. The query rewrite copied the corpus 
 - **No reserved concurrency.** The account's Lambda concurrency quota is 10, so up to 10 instances can run at once. The throttle and the daily cap bound the spend instead.
 - **Only Amazon Nova was tested.** The account is on the AWS Free plan, which excludes Marketplace offers, so Claude on Bedrock was never tried. The model ID is a variable.
 - **One index rebuild is unexplained.** Early pull requests and a later deploy built different index hashes from the same commit inputs. Later CI runs rebuilt the same hash, and I have not found the cause. If it recurs, the plan shows the index folder as replaced, which costs a re-upload and nothing else.
+- **The deploy steps were not replayed from a fresh clone.** I wrote the Deploy section while building the stack and checked the pieces separately: bootstrap, the GitHub connection, and the service through destroy and re-apply in CI. I did not run the whole sequence from an empty clone and an empty account, and I never destroyed the bootstrap stack. Expect to fix a step or two.
 - **One environment.** `dev` is the only stack. A second environment would reuse the modules with its own state key.
 
 ## Lessons

@@ -201,6 +201,7 @@ The gate is [goldpass](https://github.com/cardohso/goldpass) with deterministic 
 | Nova 2 Lite, query rewrite on | 0.69 | 0.63 | 1.00 | 0.69 | 0.75 | fail |
 | Nova Lite, search with the question ([run 41148717302](https://github.com/cardohso/rail-aws-rag/actions/runs/41148717302)) | 0.94 | 0.89 | 1.00 | 0.94 | 0.75 | **pass** |
 | Same, after destroy and re-apply ([run 41161242900](https://github.com/cardohso/rail-aws-rag/actions/runs/41161242900)) | 0.94 | 0.89 | 1.00 | 0.94 | 0.75 | **pass** |
+| Same, Lambda rebuilt from the lock file ([run 41742844405](https://github.com/cardohso/rail-aws-rag/actions/runs/41742844405)) | 0.94 | 0.89 | 1.00 | 0.94 | 0.75 | **pass** |
 
 Both early runs failed for the same reason. The query rewrite copied the corpus description from its own prompt into the search query. With the user's question, the gold passage is in the top 8 for 16 of 16 answerable questions. With Nova Lite's rewrite it is there for 12. The full analysis is in [`eval/live/TUNING.md`](eval/live/TUNING.md), and the reports are in [`eval/live/results/`](eval/live/results).
 
@@ -256,7 +257,7 @@ Both early runs failed for the same reason. The query rewrite copied the corpus 
 - **Small samples.** 16 answerable and 4 unanswerable questions give wide confidence intervals. The Guardrail test sent one request per case.
 - **No reserved concurrency.** The account's Lambda concurrency quota is 10, so up to 10 instances can run at once. The throttle and the daily cap bound the spend instead.
 - **Only Amazon Nova was tested.** The account is on the AWS Free plan, which excludes Marketplace offers, so Claude on Bedrock was never tried. The model ID is a variable.
-- **The index hash is not stable across fresh CI builds.** Two CI runs built different index hashes from the same inputs, probably because ONNX floating-point results vary across runner CPUs. That is not verified. The Actions cache keeps it stable in practice, but a cache miss shows the index as replaced in the plan.
+- **One index rebuild is unexplained.** Early pull requests and a later deploy built different index hashes from the same commit inputs. Later CI runs rebuilt the same hash, and I have not found the cause. If it recurs, the plan shows the index folder as replaced, which costs a re-upload and nothing else.
 - **One environment.** `dev` is the only stack. A second environment would reuse the modules with its own state key.
 
 ## Lessons
@@ -269,6 +270,7 @@ Both early runs failed for the same reason. The query rewrite copied the corpus 
   - Bedrock has a verification delay on first use.
   - Marketplace models are not available.
   - SNS confirmations expire after 3 days, and a destroy and re-apply sends a new one.
+- **A lock file only helps if the build reads it.** The Lambda build resolved dependencies with `uv pip compile pyproject.toml`, which ignores `uv.lock`. So each CI run could pick newer packages, and every plan showed a new zip. I first blamed the floating runner image and uv version and pinned both (`ubuntu-24.04`, uv `0.13.6`), but the next plan still changed. The fix was `uv export --frozen`, which builds from the lock file. After it, two CI runs built the same zip.
 - **Use `source_hash`, not `etag`, for large S3 objects in Terraform.** A multipart upload's ETag is not the file's MD5, so `etag` showed a diff on every plan.
 
 ## Repository layout
